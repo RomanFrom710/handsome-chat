@@ -9,10 +9,12 @@
     "bower_components"
   ],
   "dependencies": {
-    "angular": "^1.5.0",
-    "bootstrap": "~3.3.6",
-    "angular-ui-router": "~0.2.15",
-    "restangular": "~1.5.1",
-    "lodash": "~3.10.1"
+    "angular": "latest",
+    "bootstrap": "latest",
+    "angular-ui-router": "latest",
+    "restangular": "latest",
+    "lodash": "latest",
+    "angular-bootstrap": "latest",
+    "angular-animate": "latest"
   }
 }

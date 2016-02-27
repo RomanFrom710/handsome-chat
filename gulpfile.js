@@ -15,10 +15,12 @@ var production = environments.production;
 var compiledPath = 'public/compiled';
 
 var vendors = [
+    'lodash/lodash.js',
     'angular/angular.js',
     'angular-ui-router/release/angular-ui-router.js',
     'restangular/dist/restangular.js',
-    'lodash/lodash.js'
+    'angular-animate/angular-animate.js',
+    'angular-bootstrap/ui-bootstrap.js'
 ];
 vendors = vendors.map(function (path) { return 'bower_components/' + path; });
 
@@ -74,7 +76,7 @@ gulp.task('watch', function () {
 gulp.task('start', function () {
     var env = production() ? 'production' : 'development';
     nodemon({
-        script: 'server.js',
+        script: './src/server/start.js',
         env: { 'NODE_ENV': env }
     });
 });
