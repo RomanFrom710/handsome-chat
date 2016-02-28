@@ -4,6 +4,7 @@
   "license": "MIT",
   "devDependencies": {
     "gulp": "latest",
+    "gulp-angular-filesort": "latest",
     "gulp-angular-templatecache": "latest",
     "gulp-autoprefixer": "latest",
     "gulp-concat": "latest",
@@ -15,6 +16,7 @@
     "gulp-uglify": "latest"
   },
   "dependencies": {
+    "body-parser": "latest",
     "bower": "latest",
     "express": "latest",
     "mongoose": "latest",

@@ -1,4 +1,10 @@
 (function () {
     angular
-        .module('handsome-chat', ['chat', 'gallery', 'users']);
+        .module('handsome-chat')
+        .config(['RestangularProvider', 'environment',
+            function (RestangularProvider, env) {
+                RestangularProvider.setBaseUrl(env.apiUrl);
+            }]);
+
+    angular.bootstrap(document, ['handsome-chat']);
 })();

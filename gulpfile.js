@@ -8,6 +8,7 @@ var nodemon = require('gulp-nodemon');
 var autoprefixer = require('gulp-autoprefixer');
 var templateCache = require('gulp-angular-templatecache');
 var plumber = require('gulp-plumber');
+var angularSort = require('gulp-angular-filesort');
 
 var environments = require('gulp-environments');
 var production = environments.production;
@@ -20,21 +21,32 @@ var vendors = [
     'angular-ui-router/release/angular-ui-router.js',
     'restangular/dist/restangular.js',
     'angular-animate/angular-animate.js',
-    'angular-bootstrap/ui-bootstrap.js'
+    'angular-bootstrap/ui-bootstrap.js',
+    'ngstorage/ngStorage.js'
 ];
 vendors = vendors.map(function (path) { return 'bower_components/' + path; });
 
 var scripts = [
-    'app.js',
-    '**/module.js',
-    '**/*.js'
+    'src/client/app/**/!(app|module)*.js',
+    'src/client/app/app.js'
 ];
-scripts = scripts.map(function (path) { return 'src/client/app/' + path; });
+var modules = [
+    'src/client/app/**/module.js'
+];
 
 
 gulp.task('vendor-scripts', function() {
     return gulp.src(vendors)
         .pipe(concat('vendor.js'))
+        .pipe(production(uglify()))
+        .pipe(gulp.dest(compiledPath));
+});
+
+
+gulp.task('modules', function() {
+    return gulp.src(modules)
+        .pipe(angularSort())
+        .pipe(concat('modules.js'))
         .pipe(production(uglify()))
         .pipe(gulp.dest(compiledPath));
 });
@@ -61,14 +73,14 @@ gulp.task('less', function() {
 
 gulp.task('templates', function() {
     return gulp.src('src/**/*.html')
-       .pipe(templateCache('templates.js', { module: 'templates' }))
+       .pipe(templateCache('templates.js', { module: 'templates', standalone: true }))
        .pipe(gulp.dest(compiledPath));
 });
 
 
 gulp.task('watch', function () {
     gulp.watch('src/client/styles/**/*.less', ['less']);
-    gulp.watch('src/client/app/**/*.js', ['scripts']);
+    gulp.watch('src/client/app/**/*.js', ['scripts', 'modules']);
     gulp.watch('src/client/**/*.html', ['templates']);
 });
 
@@ -82,4 +94,4 @@ gulp.task('start', function () {
 });
 
 
-gulp.task('default', ['vendor-scripts', 'scripts', 'templates', 'less', 'watch', 'start']);
+gulp.task('default', ['vendor-scripts', 'scripts', 'modules', 'templates', 'less', 'watch', 'start']);
