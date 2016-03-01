@@ -1,16 +1,16 @@
-var User = require('./user-model');
 var hashService= require('./password-hash-service');
+var userRepository = require('./user-repository');
 
 exports.findByName = findByName;
 exports.createUser = createUser;
 exports.findById = findById;
 
 function findById(id) {
-    return User.findById(id);
+    return userRepository.findById(id);
 }
 
 function findByName(name) {
-    return User.findOne({ name: name });
+    return userRepository.findByName(name);
 }
 
 function createUser(name, password) {
@@ -20,11 +20,11 @@ function createUser(name, password) {
 
     var passwordHash = hashService.getHash(password);
 
-    return findByName(name)
+    return userRepository.findByName(name)
         .then(function (user) {
            if (user) {
                throw new Error('There is already the user with such name!');
            }
-           return User.create({ name: name, passwordHash: passwordHash });
+           return userRepository.createUser(name, passwordHash);
         });
 }

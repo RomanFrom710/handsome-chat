@@ -3,9 +3,9 @@
         .module('user')
         .controller('registerController', registerController);
 
-    registerController.$inject = ['$scope', 'userService'];
+    registerController.$inject = ['userService'];
 
-    function registerController($scope, userService) {
+    function registerController(userService) {
         var vm = this;
 
         vm.user = {

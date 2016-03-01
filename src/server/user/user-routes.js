@@ -17,7 +17,7 @@ router.route('').post(function (req, res) {
             res.send(true);
         })
         .catch(function (err) {
-            res.send(err);
+            res.status(409).send(err.message);
         });
 });
 
