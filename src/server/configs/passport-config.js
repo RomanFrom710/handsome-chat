@@ -3,7 +3,12 @@ var Strategy = require('passport-local').Strategy;
 var userService = require('../user/user-service');
 var hashService = require('../user/password-hash-service');
 
-passport.use(new Strategy(function(username, password, cb) {
+var strategyOptions = {
+    usernameField: 'name',
+    passwordField: 'password'
+};
+
+function strategyFunction(username, password, cb) {
     var passwordHash = hashService.getHash(password);
     userService.findByName(username)
         .then(function (user) {
@@ -13,7 +18,9 @@ passport.use(new Strategy(function(username, password, cb) {
             cb(null, user);
         })
         .catch(function (err) { cb(err); });
-}));
+}
+
+passport.use(new Strategy(strategyOptions, strategyFunction));
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);

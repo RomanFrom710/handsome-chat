@@ -4,14 +4,16 @@ var userService = require('./user-service');
 
 module.exports = router;
 
-router.route('login').post(
+router.route('/login').post(
     passport.authenticate('local', {
-        successRedirect: '/chat',
-        failureRedirect: '/login'
-    })
+        failureFlash: true
+    }),
+    function (req, res) {
+        res.status(200).send();
+    }
 );
 
-router.route('').post(function (req, res) {
+router.route('/register').post(function (req, res) {
     userService.createUser(req.body.name, req.body.password)
         .then(function () {
             res.send(true);
@@ -21,7 +23,7 @@ router.route('').post(function (req, res) {
         });
 });
 
-router.route('logout').post(function (req, res) {
+router.route('/logout').post(function (req, res) {
     req.logout();
     res.redirect('/');
 });

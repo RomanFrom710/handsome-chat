@@ -7,7 +7,7 @@
 
     function UserService(Restangular, $sessionStorage) {
         this.register = function (user) {
-            return Restangular.all('user').post(user);
+            return Restangular.all('user/register').post(user);
         };
 
         this.login = function (user) {
