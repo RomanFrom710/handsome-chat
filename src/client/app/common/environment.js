@@ -7,6 +7,6 @@
     };
 
     angular
-        .module('handsome-chat')
+        .module('common')
         .constant('environment', env);
 })();
