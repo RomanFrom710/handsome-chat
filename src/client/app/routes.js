@@ -3,8 +3,6 @@
         .module('handsome-chat')
         .config(['$stateProvider', '$urlRouterProvider', 'environment',
             function ($stateProvider, $urlRouterProvider, env) {
-                $urlRouterProvider.otherwise('/');
-
                 $stateProvider
                     .state('login', {
                         url: '/login',
@@ -17,6 +15,8 @@
                         templateUrl: env.templatesUrl + 'user/register/register.html',
                         controller: 'registerController',
                         controllerAs: 'vm'
-                    })
+                    });
+
+                $urlRouterProvider.otherwise('/');
             }]);
 })();

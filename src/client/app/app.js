@@ -5,7 +5,12 @@
             function (RestangularProvider, $locationProvider, $httpProvider, env) {
                 RestangularProvider.setBaseUrl(env.apiUrl);
                 $locationProvider.html5Mode(true);
-                $httpProvider.interceptors.push('errorHandlingInterceptor');
+            }])
+        .run(['Restangular', 'toastr',
+            function (Restangular, toastr) {
+                Restangular.setErrorInterceptor(function (response) {
+                    toastr.error(response.data);
+                });
             }]);
 
     angular.bootstrap(document, ['handsome-chat']);

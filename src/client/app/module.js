@@ -8,6 +8,7 @@
         'ui.router',
         'restangular',
         'ngStorage',
+        'ngAnimate',
         'toastr'
     ];
     angular

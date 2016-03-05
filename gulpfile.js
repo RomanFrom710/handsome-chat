@@ -23,7 +23,7 @@ var vendors = [
     'angular-animate/angular-animate.js',
     'angular-bootstrap/ui-bootstrap.js',
     'ngstorage/ngStorage.js',
-    'angular-toastr/dist/angular-toastr.js'
+    'angular-toastr/dist/angular-toastr.tpls.js'
 ];
 vendors = vendors.map(function (path) { return 'bower_components/' + path; });
 
