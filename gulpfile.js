@@ -26,6 +26,7 @@ var vendors = [
     'angular-toastr/dist/angular-toastr.tpls.js'
 ];
 vendors = vendors.map(function (path) { return 'bower_components/' + path; });
+vendors.push('node_modules/socket.io-client/socket.io.js');
 
 var scripts = [
     'src/client/app/**/!(app|module)*.js',

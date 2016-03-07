@@ -21,6 +21,7 @@
     "express": "latest",
     "mongoose": "latest",
     "passport": "latest",
-    "passport-local": "latest"
+    "passport-local": "latest",
+    "socket.io": "latest"
   }
 }

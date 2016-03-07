@@ -8,6 +8,8 @@ var config = require('./config');
 mongoose.connect(config.mongoConnectionString);
 
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -24,4 +26,4 @@ app.all('/*', function (req, res) {
     res.sendFile(indexPath);
 });
 
-app.listen(3000);
+server.listen(3000);

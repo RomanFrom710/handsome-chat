@@ -23,6 +23,7 @@
                         controllerAs: 'vm'
                     });
 
+                $urlRouterProvider.when('/', '/chat');
                 $urlRouterProvider.otherwise('/');
             }]);
 })();
