@@ -6,7 +6,8 @@
     <title>Handsome chat</title>
     <base href="/" />
 </head>
-<body>
+<body ng-controller="mainController as vm">
+    <h1 ng-if="vm.currentUser">Current user: {{vm.currentUser}}</h1>
     <div ui-view></div>
 
 
