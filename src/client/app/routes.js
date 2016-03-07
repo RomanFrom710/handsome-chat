@@ -15,6 +15,12 @@
                         templateUrl: env.templatesUrl + 'user/register/register.html',
                         controller: 'registerController',
                         controllerAs: 'vm'
+                    })
+                    .state('chat', {
+                        url: '/chat',
+                        templateUrl: env.templatesUrl + 'chat/chat.html',
+                        controller: 'chatController',
+                        controllerAs: 'vm'
                     });
 
                 $urlRouterProvider.otherwise('/');

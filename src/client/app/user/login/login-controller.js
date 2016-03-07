@@ -3,9 +3,9 @@
         .module('user')
         .controller('loginController', loginController);
 
-    loginController.$inject = ['userService'];
+    loginController.$inject = ['$state', 'userService'];
 
-    function loginController(userService) {
+    function loginController($state, userService) {
         var vm = this;
 
         vm.user = {
@@ -14,7 +14,10 @@
         };
 
         vm.submit = function () {
-            userService.login(vm.user);
+            userService.login(vm.user)
+                .then(function () {
+                    $state.go('chat');
+                });
         }
     }
 })();

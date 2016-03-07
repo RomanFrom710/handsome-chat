@@ -9,5 +9,10 @@
         var vm = this;
 
         vm.currentUser = userService.getCurrentUser();
+        if (vm.currentUser) {
+            $state.go('chat');
+        } else {
+            $state.go('login');
+        }
     }
 })();
