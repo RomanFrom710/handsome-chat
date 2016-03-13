@@ -7,9 +7,12 @@
     <base href="/" />
 </head>
 <body ng-controller="mainController as vm">
-    <h1 ng-if="vm.getCurrentUser()">
-        Current user: <span ng-bind="vm.getCurrentUser()"></span>
-    </h1>
+    <div ng-if="vm.getCurrentUser()">
+        <h1>
+            Current user: <span ng-bind="vm.getCurrentUser()"></span>
+        </h1>
+        <button ng-click="vm.logout()">Logout</button>
+    </div>
     <div ui-view></div>
 
 

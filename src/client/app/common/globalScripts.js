@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('common')
-        .factory('socket', function () {
+        .factory('io', function () {
             return io;
         });
 })();

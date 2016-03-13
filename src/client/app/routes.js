@@ -17,13 +17,12 @@
                         controllerAs: 'vm'
                     })
                     .state('chat', {
-                        url: '/chat',
+                        url: '/',
                         templateUrl: env.templatesUrl + 'chat/chat.html',
                         controller: 'chatController',
                         controllerAs: 'vm'
                     });
 
-                $urlRouterProvider.when('/', '/chat');
                 $urlRouterProvider.otherwise('/');
             }]);
 })();

@@ -12,5 +12,12 @@
         if (!vm.getCurrentUser()) {
             $state.go('login');
         }
+
+        vm.logout = function () {
+            userService.logout()
+                .then(function () {
+                    $state.go('login');
+                });
+        };
     }
 })();

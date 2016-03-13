@@ -1,13 +1,12 @@
 var router = require('express').Router();
 var passport = require('passport');
 var userService = require('./user-service');
+var config = require('../config');
 
 module.exports = router;
 
 router.route('/login').post(
-    passport.authenticate('local', {
-        failureFlash: true
-    }),
+    passport.authenticate('local', { failureFlash: true }),
     function (req, res) {
         res.status(200).send();
     }
@@ -25,5 +24,6 @@ router.route('/register').post(function (req, res) {
 
 router.route('/logout').post(function (req, res) {
     req.logout();
-    res.redirect('/');
+    req.session.destroy();
+    res.status(200).send();
 });

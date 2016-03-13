@@ -10,9 +10,17 @@ function initSocket(server) {
     });
 
     io.on('connection', function (socket) {
-        console.log(socket.request.session.passport.user);
+        console.log('connected');
         socket.on('disconnect', function () {
             console.log('disconnect');
-        })
+        });
     });
+
+    function getUser(req) {
+        var passport = req.session.passport;
+        if (passport && passport.user) {
+            return passport.user;
+        }
+        return null;
+    }
 }

@@ -3,9 +3,9 @@
         .module('user')
         .service('userService', UserService);
 
-    UserService.$inject = ['Restangular', '$sessionStorage'];
+    UserService.$inject = ['Restangular', '$localStorage', 'environment'];
 
-    function UserService(Restangular, $sessionStorage) {
+    function UserService(Restangular, $localStorage, env) {
         this.register = function (user) {
             return Restangular.all('user/register').post(user);
         };
@@ -13,12 +13,18 @@
         this.login = function (user) {
             return Restangular.all('user/login').post(user)
                 .then(function () {
-                    $sessionStorage.user = user.name;
+                    $localStorage.user = user.name;
                 });
         };
 
+        this.logout = function () {
+            delete $localStorage.user;
+            return Restangular.all('user/logout').post();
+        };
+
+        // todo: handle case when session is expired
         this.getCurrentUser = function () {
-            return $sessionStorage.user || null;
+            return $localStorage.user || null;
         };
     }
 })();

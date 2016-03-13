@@ -9,7 +9,11 @@
         .run(['Restangular', 'toastr',
             function (Restangular, toastr) {
                 Restangular.setErrorInterceptor(function (response) {
+                    if (response.status === 403) {
+                        //todo: redirect to the login page
+                    }
                     toastr.error(response.data);
+                    return false;
                 });
             }]);
 

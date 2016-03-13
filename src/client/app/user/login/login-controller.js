@@ -8,6 +8,10 @@
     function loginController($state, userService) {
         var vm = this;
 
+        if (userService.getCurrentUser()) {
+            $state.go('chat');
+        }
+
         vm.user = {
             name: '',
             password: ''
