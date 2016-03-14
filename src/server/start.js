@@ -27,12 +27,8 @@ require('./inits/passport-init');
 var userRoutes = require('./user/user-routes');
 app.use('/api/user/', userRoutes);
 
-// Navigation hack
-app.all('/*', function (req, res) {
-    var indexPath = path.join(__dirname, '..', '..' ,'public', 'index.html');
-    res.sendFile(indexPath);
-});
 
+// Starting server
 var server = http.createServer(app);
 require('./inits/socket-init')(server);
 

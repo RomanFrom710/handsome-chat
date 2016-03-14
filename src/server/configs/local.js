@@ -6,5 +6,5 @@ var config = {
         secret: 'jsIsHandsome'
     }
 };
-//todo: add client urls
+
 module.exports = config;

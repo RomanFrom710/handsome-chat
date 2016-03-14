@@ -14,8 +14,10 @@ router.route('/login').post(
 
 router.route('/register').post(function (req, res) {
     userService.createUser(req.body.name, req.body.password)
-        .then(function () {
-            res.send(true);
+        .then(function (user) {
+            req.login(user, function () {
+                res.send(true);
+            });
         })
         .catch(function (err) {
             res.status(409).send(err.message);

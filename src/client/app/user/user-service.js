@@ -3,11 +3,14 @@
         .module('user')
         .service('userService', UserService);
 
-    UserService.$inject = ['Restangular', '$localStorage', 'environment'];
+    UserService.$inject = ['Restangular', '$localStorage'];
 
-    function UserService(Restangular, $localStorage, env) {
+    function UserService(Restangular, $localStorage) {
         this.register = function (user) {
-            return Restangular.all('user/register').post(user);
+            return Restangular.all('user/register').post(user)
+                .then(function () {
+                    $localStorage.user = user.name;
+                });
         };
 
         this.login = function (user) {

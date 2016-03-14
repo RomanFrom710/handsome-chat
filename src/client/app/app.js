@@ -1,16 +1,15 @@
 (function () {
     angular
         .module('handsome-chat')
-        .config(['RestangularProvider', '$locationProvider', '$httpProvider', 'environment',
-            function (RestangularProvider, $locationProvider, $httpProvider, env) {
+        .config(['RestangularProvider', 'environment',
+            function (RestangularProvider, env) {
                 RestangularProvider.setBaseUrl(env.apiUrl);
-                $locationProvider.html5Mode(true);
             }])
-        .run(['Restangular', 'toastr',
-            function (Restangular, toastr) {
+        .run(['Restangular', 'toastr', '$state',
+            function (Restangular, toastr, $state) {
                 Restangular.setErrorInterceptor(function (response) {
                     if (response.status === 403) {
-                        //todo: redirect to the login page
+                        $state.go('login');
                     }
                     toastr.error(response.data);
                     return false;
