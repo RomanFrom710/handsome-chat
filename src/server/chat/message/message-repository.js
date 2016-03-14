@@ -6,7 +6,8 @@ exports.getLastMessages = getLastMessages;
 function post(content, userId, roomId) {
     return Message.create({
         content: content,
-        room: roomId,
+        //todo: uncomment when rooms will be implemented on client
+        //room: roomId,
         author: userId
     });
 }

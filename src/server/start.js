@@ -2,7 +2,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var path = require('path');
 var http = require('http');
 var config = require('./config');
 

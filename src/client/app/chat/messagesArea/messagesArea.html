@@ -1,1 +1,7 @@
-<p>messages area</p>
+<ul>
+    <li ng-repeat="message in messages track by $index">
+        {{message.user}}: {{message.content}}
+    </li>
+</ul>
+<input ng-model="currentMessage" type="text" />
+<button ng-click="send()">Send</button>

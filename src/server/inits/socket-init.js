@@ -1,4 +1,6 @@
 var session = require('./session-init');
+var chatService = require('../chat/chat-service');
+var userService = require('../user/user-service');
 
 module.exports = initSocket;
 
@@ -11,13 +13,29 @@ function initSocket(server) {
 
     io.on('connection', function (socket) {
         console.log('connected');
+
         socket.on('disconnect', function () {
             console.log('disconnect');
         });
+
+        socket.on('message', function (message) {
+            var userId = getUserId(socket);
+            if (!userId) {
+                return;
+            }
+
+            userService.findById(userId)
+                .then(function (user) {
+                    message.user = user.name;
+                    io.emit('message', message);
+                });
+
+            chatService.post(message.content, userId);
+        });
     });
 
-    function getUser(req) {
-        var passport = req.session.passport;
+    function getUserId(socket) {
+        var passport = socket.request.session.passport;
         if (passport && passport.user) {
             return passport.user;
         }
