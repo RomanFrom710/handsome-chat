@@ -3,5 +3,7 @@
         {{message.user}}: {{message.content}}
     </li>
 </ul>
-<input ng-model="currentMessage" type="text" />
-<button ng-click="send()">Send</button>
+<form ng-submit="send()">
+    <input ng-model="currentMessage" type="text" />
+    <button type="submit">Send</button>
+</form>
