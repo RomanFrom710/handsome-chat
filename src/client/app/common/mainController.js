@@ -3,14 +3,14 @@
         .module('common')
         .controller('mainController', mainController);
 
-    mainController.$inject = ['$state', 'userService'];
+    mainController.$inject = ['$state', 'userService', 'socketService'];
 
-    function mainController($state, userService) {
+    function mainController($state, userService, socketService) {
         var vm = this;
 
         vm.getCurrentUser = userService.getCurrentUser;
-        if (!vm.getCurrentUser()) {
-            $state.go('login');
+        if (vm.getCurrentUser()) {
+            socketService.connect();
         }
 
         vm.logout = function () {

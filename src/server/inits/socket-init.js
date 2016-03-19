@@ -2,7 +2,7 @@ var session = require('./session-init');
 var chatService = require('../chat/chat-service');
 var userService = require('../user/user-service');
 var _ = require('lodash');
-
+// todo: this file should be refactored
 module.exports = initSocket;
 
 function initSocket(server) {
@@ -10,6 +10,14 @@ function initSocket(server) {
 
     io.use(function (socket, next) {
         session(socket.request, {}, next);
+    });
+
+    io.use(function (socket, next) {
+        if (getUserId(socket)) {
+            next();
+        } else {
+            next(new Error('Not authorized'));
+        }
     });
 
     io.on('connection', function (socket) {

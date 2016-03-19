@@ -3,9 +3,11 @@
         .module('user')
         .service('userService', UserService);
 
-    UserService.$inject = ['Restangular', '$localStorage'];
+    UserService.$inject = ['Restangular', '$localStorage', 'socketService'];
 
-    function UserService(Restangular, $localStorage) {
+    function UserService(Restangular, $localStorage, socketService) {
+        var self = this;
+
         this.register = function (user) {
             return Restangular.all('user/register').post(user)
                 .then(function () {
@@ -17,12 +19,15 @@
             return Restangular.all('user/login').post(user)
                 .then(function () {
                     $localStorage.user = user.name;
+                    socketService.connect();
                 });
         };
 
         this.logout = function () {
-            delete $localStorage.user;
-            return Restangular.all('user/logout').post();
+            return Restangular.all('user/logout').post()
+                .then(function () {
+                    self.resetCurrentUser();
+                });
         };
 
         this.getCurrentUser = function () {
@@ -30,7 +35,10 @@
         };
 
         this.resetCurrentUser = function () {
-            delete $localStorage.user;
+            if ($localStorage.user) {
+                delete $localStorage.user;
+                socketService.disconnect();
+            }
         }
     }
 })();
