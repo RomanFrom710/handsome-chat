@@ -25,9 +25,12 @@
             return Restangular.all('user/logout').post();
         };
 
-        // todo: handle case when session is expired
         this.getCurrentUser = function () {
             return $localStorage.user || null;
         };
+
+        this.resetCurrentUser = function () {
+            delete $localStorage.user;
+        }
     }
 })();
