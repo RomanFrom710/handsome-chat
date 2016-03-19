@@ -24,6 +24,9 @@
                         resolve: {
                             lastMessages: ['chatService', function (chatService) {
                                 return chatService.getLastMessages();
+                            }],
+                            onlineUsers: ['chatService', function (chatService) {
+                                return chatService.getOnlineUsers();
                             }]
                         }
                     });

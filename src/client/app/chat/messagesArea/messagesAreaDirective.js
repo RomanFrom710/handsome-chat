@@ -17,10 +17,10 @@
 
                 scope.send = function () {
                     chatService.sendMessage(scope.currentMessage);
+                    scope.currentMessage = '';
                 };
 
                 chatService.onMessage(function (messageData) {
-                    scope.currentMessage = '';
                     scope.messages.push(messageData);
                 });
             }

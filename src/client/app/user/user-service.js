@@ -8,6 +8,10 @@
     function UserService(Restangular, $localStorage, socketService) {
         var self = this;
 
+        if (getCurrentUser()) {
+            socketService.connect();
+        }
+        
         this.register = function (user) {
             return Restangular.all('user/register').post(user)
                 .then(function () {
@@ -30,15 +34,17 @@
                 });
         };
 
-        this.getCurrentUser = function () {
-            return $localStorage.user || null;
-        };
+        this.getCurrentUser = getCurrentUser;
 
         this.resetCurrentUser = function () {
             if ($localStorage.user) {
                 delete $localStorage.user;
                 socketService.disconnect();
             }
+        }
+
+        function getCurrentUser () {
+            return $localStorage.user || null;
         }
     }
 })();
