@@ -21,6 +21,7 @@
     "connect-mongo": "latest",
     "express": "latest",
     "express-session": "latest",
+    "lodash": "latest",
     "mongoose": "latest",
     "passport": "latest",
     "passport-local": "latest",

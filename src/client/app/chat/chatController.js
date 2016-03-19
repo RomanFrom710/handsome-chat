@@ -3,11 +3,11 @@
         .module('chat')
         .controller('chatController', chatController);
 
-    chatController.$inject = [];
+    chatController.$inject = ['lastMessages'];
 
-    function chatController() {
+    function chatController(lastMessages) {
         var vm = this;
 
-
+        vm.messages = lastMessages;
     }
 })();

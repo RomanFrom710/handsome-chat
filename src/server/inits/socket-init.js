@@ -1,6 +1,7 @@
 var session = require('./session-init');
 var chatService = require('../chat/chat-service');
 var userService = require('../user/user-service');
+var _ = require('lodash');
 
 module.exports = initSocket;
 
@@ -26,7 +27,7 @@ function initSocket(server) {
 
             userService.findById(userId)
                 .then(function (user) {
-                    message.user = user.name;
+                    message.author = _.pick(user, ['id', 'name']);
                     io.emit('message', message);
                 });
 

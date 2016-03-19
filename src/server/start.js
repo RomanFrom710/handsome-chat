@@ -26,6 +26,9 @@ require('./inits/passport-init');
 var userRoutes = require('./user/user-routes');
 app.use('/api/user/', userRoutes);
 
+var chatRoutes = require('./chat/chat-routes');
+app.use('/api/chat/', chatRoutes);
+
 
 // Starting server
 var server = http.createServer(app);

@@ -4,6 +4,9 @@ var config = {
     session: {
         name: 'handsomeSession',
         secret: 'jsIsHandsome'
+    },
+    application: {
+        lastMessagesCount: 5
     }
 };
 

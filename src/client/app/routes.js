@@ -20,7 +20,12 @@
                         url: '/',
                         templateUrl: env.templatesUrl + 'chat/chat.html',
                         controller: 'chatController',
-                        controllerAs: 'vm'
+                        controllerAs: 'vm',
+                        resolve: {
+                            lastMessages: ['chatService', function (chatService) {
+                                return chatService.getLastMessages();
+                            }]
+                        }
                     });
 
                 $urlRouterProvider.otherwise('/');

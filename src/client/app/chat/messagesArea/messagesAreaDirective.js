@@ -10,10 +10,9 @@
             restrict: 'E',
             templateUrl: env.templatesUrl + 'chat/messagesArea/messagesArea.html',
             scope: {
-
+                messages: '='
             },
             link: function (scope) {
-                scope.messages = [];
                 scope.currentMessage = '';
 
                 scope.send = function () {
