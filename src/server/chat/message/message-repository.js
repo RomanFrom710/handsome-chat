@@ -1,17 +1,14 @@
 var Message = require('./message-model');
 var _ = require('lodash');
 
-exports.post = post;
-exports.getLastMessages = getLastMessages;
-
-function post(content, userId) {
+exports.post = function (content, userId) {
     return Message.create({
         content: content,
         author: userId
     });
-}
+};
 
-function getLastMessages(messagesCount) {
+exports.getLastMessages = function (messagesCount) {
     return Message
         .find()
         .limit(messagesCount)
@@ -21,4 +18,4 @@ function getLastMessages(messagesCount) {
         .then(function (messages) {
             return _.reverse(messages); // Finally messages should be sorted asc
         });
-}
+};

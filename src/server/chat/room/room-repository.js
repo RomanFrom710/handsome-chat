@@ -1,12 +1,9 @@
 var Room = require('./room-model');
 
-exports.createRoom = createRoom;
-exports.getRooms = getRooms;
-
-function createRoom(name) {
+exports.createRoom = function (name) {
     return Room.create({ name: name });
-}
+};
 
-function getRooms() {
+exports.getRooms = function () {
     return Room.find();
-}
+};

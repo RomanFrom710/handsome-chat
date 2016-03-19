@@ -1,19 +1,15 @@
 var hashService= require('./password-hash-service');
 var userRepository = require('./user-repository');
 
-exports.findByName = findByName;
-exports.createUser = createUser;
-exports.findById = findById;
-
-function findById(id) {
+exports.findById = function (id) {
     return userRepository.findById(id);
-}
+};
 
-function findByName(name) {
+exports.findByName = function (name) {
     return userRepository.findByName(name);
-}
+};
 
-function createUser(name, password) {
+exports.createUser = function (name, password) {
     if (!name) {
         throw new Error('Name cannot be empty!');
     }
@@ -27,4 +23,4 @@ function createUser(name, password) {
            }
            return userRepository.createUser(name, passwordHash);
         });
-}
+};

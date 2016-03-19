@@ -1,17 +1,13 @@
 var User = require('./user-model');
 
-exports.findByName = findByName;
-exports.createUser = createUser;
-exports.findById = findById;
-
-function findById(id) {
+exports.findById = function (id) {
     return User.findById(id);
-}
+};
 
-function findByName(name) {
+exports.findByName = function (name) {
     return User.findOne({ name: name });
-}
+};
 
-function createUser(name, passwordHash) {
+exports.createUser = function (name, passwordHash) {
     return User.create({ name: name, passwordHash: passwordHash });
-}
+};

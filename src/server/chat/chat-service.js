@@ -1,14 +1,11 @@
 var messageRepository = require('./message/message-repository');
 var config = require('../config');
 
-exports.post = post;
-exports.getLastMessages = getLastMessages;
-
-function post(message, userId) {
+exports.post = function (message, userId) {
     return messageRepository.post(message, userId);
-}
+};
 
-function getLastMessages() {
+exports.getLastMessages = function () {
     var messagesCount = config.application.lastMessagesCount;
     return messageRepository.getLastMessages(messagesCount);
-}
+};
