@@ -64,7 +64,10 @@ gulp.task('scripts', function() {
 
 gulp.task('less', function() {
     return gulp.src('src/client/styles/main.less')
-        .pipe(plumber())
+        .pipe(plumber(function (err) {
+            console.error(err.message);
+            this.emit('end');
+        }))
         .pipe(less())
         .pipe(concat('styles.css'))
         .pipe(autoprefixer('last 2 versions'))
