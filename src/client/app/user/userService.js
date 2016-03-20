@@ -41,7 +41,7 @@
                 delete $localStorage.user;
                 socketService.disconnect();
             }
-        }
+        };
 
         function getCurrentUser () {
             return $localStorage.user || null;

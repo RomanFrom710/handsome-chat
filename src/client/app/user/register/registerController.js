@@ -8,6 +8,11 @@
     function registerController($state, userService) {
         var vm = this;
 
+        if (userService.getCurrentUser()) {
+            $state.go('chat');
+        }
+        
+        vm.confirmPassword = '';
         vm.user = {
             name: '',
             password: ''
