@@ -7,16 +7,17 @@
             }])
         .run(['Restangular', 'toastr', '$state', 'userService',
             function (Restangular, toastr, $state, userService) {
+                
                 Restangular.setErrorInterceptor(function (response) {
                     if (response.status === 401) {
                         userService.resetCurrentUser();
-                        toastr.error('Unauthorized');
                         $state.go('login');
                     } else {
                         toastr.error(response.data);
                     }
                     return false;
                 });
+                
             }]);
 
     angular.bootstrap(document, ['handsome-chat']);

@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var http = require('http');
 var config = require('./config');
+var authMiddleware = require('./auth');
 
 mongoose.connect(config.mongoConnectionString);
 
@@ -27,7 +28,7 @@ var userRoutes = require('./user/user-routes');
 app.use('/api/user/', userRoutes);
 
 var chatRoutes = require('./chat/chat-routes');
-app.use('/api/chat/', chatRoutes);
+app.use('/api/chat/', authMiddleware, chatRoutes);
 
 
 // Starting server
