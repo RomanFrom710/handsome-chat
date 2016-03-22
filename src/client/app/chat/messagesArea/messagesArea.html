@@ -1,9 +1,17 @@
-<ul>
-    <li ng-repeat="message in messages track by $index">
-        {{message.author.name}}: {{message.content}}
-    </li>
-</ul>
-<form ng-submit="send()">
-    <input ng-model="currentMessage" type="text" />
-    <button type="submit">Send</button>
+<div class="messages">
+    <p ng-repeat="message in messages track by $index"
+       ng-class="{'my-message': message.author.name === currentUser}"
+       class="message card">
+        <strong ng-bind="message.author.name"></strong>:
+        <span ng-bind="message.content"></span>
+    </p>
+</div>
+<form ng-submit="send()" name="sendForm" class="send-form input-group">
+    <input ng-model="currentMessage"
+           class="form-control"
+           type="text"
+           placeholder="Enter a message..." />
+    <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary">Send</button>
+    </span>
 </form>

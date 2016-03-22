@@ -3,9 +3,9 @@
         .module('chat')
         .directive('messagesArea', messagesAreaDirective);
 
-    messagesAreaDirective.$inject = ['chatService', 'environment'];
+    messagesAreaDirective.$inject = ['userService', 'chatService', 'environment'];
 
-    function messagesAreaDirective(chatService, env) {
+    function messagesAreaDirective(userService, chatService, env) {
         return {
             restrict: 'E',
             templateUrl: env.templatesUrl + 'chat/messagesArea/messagesArea.html',
@@ -14,6 +14,7 @@
             },
             link: function (scope) {
                 scope.currentMessage = '';
+                scope.currentUser = userService.getCurrentUser();
 
                 scope.send = function () {
                     chatService.sendMessage(scope.currentMessage);
