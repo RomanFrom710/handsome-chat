@@ -23,5 +23,5 @@ exports.removeConnectedUser = function (id) {
 };
 
 exports.getOnlineUsers = function () {
-    return onlineUsers;
+    return onlineUsers.slice();
 };
