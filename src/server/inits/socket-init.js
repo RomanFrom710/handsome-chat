@@ -42,6 +42,7 @@ function initSocket(server) {
             userService.findById(userId)
                 .then(function (user) {
                     message.author = _.pick(user, ['id', 'name']);
+                    message.created = new Date();
                     io.emit('message', message);
                 });
 

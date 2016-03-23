@@ -21,7 +21,7 @@ var vendors = [
     'angular-ui-router/release/angular-ui-router.js',
     'restangular/dist/restangular.js',
     'angular-animate/angular-animate.js',
-    'angular-bootstrap/ui-bootstrap.js',
+    'angular-bootstrap/ui-bootstrap-tpls.js',
     'ngstorage/ngStorage.js',
     'angular-toastr/dist/angular-toastr.tpls.js'
 ];

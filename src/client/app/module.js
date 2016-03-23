@@ -6,6 +6,7 @@
         'user',
         'templates',
         'ui.router',
+        'ui.bootstrap',
         'restangular',
         'ngStorage',
         'ngAnimate',
