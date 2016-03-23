@@ -5,12 +5,19 @@ var config = require('../config');
 
 module.exports = router;
 
-router.route('/login').post(
-    passport.authenticate('local', { failureFlash: true }),
-    function (req, res) {
-        res.status(200).send();
-    }
-);
+router.route('/login').post(function (req, res, next) {
+    passport.authenticate('local', function (err, user) {
+        if (err) { return next(err); }
+        if (user) {
+            req.login(user, function (err) {
+                if (err) { return next(err); }
+                res.status(200).send();
+            });
+        } else {
+            res.status(400).send('Wrong username or password!');
+        }
+    })(req, res, next);
+});
 
 router.route('/register').post(function (req, res) {
     userService.createUser(req.body.name, req.body.password)
