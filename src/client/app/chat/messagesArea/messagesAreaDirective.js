@@ -3,9 +3,9 @@
         .module('chat')
         .directive('messagesArea', messagesAreaDirective);
 
-    messagesAreaDirective.$inject = ['userService', 'chatService', 'lodash', 'environment'];
+    messagesAreaDirective.$inject = ['userService', 'chatService', '$timeout', 'lodash', 'environment'];
 
-    function messagesAreaDirective(userService, chatService, _, env) {
+    function messagesAreaDirective(userService, chatService, $timeout, _, env) {
         return {
             restrict: 'E',
             templateUrl: env.templatesUrl + 'chat/messagesArea/messagesArea.html',
@@ -31,6 +31,11 @@
                 });
 
                 scope.$watchCollection('messages', function () {
+                    $timeout(function () {
+                        // We need to wait, because message
+                        // has no content yet.
+                        messagesElement.scrollTop = messagesElement.scrollHeight;
+                    });
                     messagesElement.scrollTop = messagesElement.scrollHeight;
                 });
             }

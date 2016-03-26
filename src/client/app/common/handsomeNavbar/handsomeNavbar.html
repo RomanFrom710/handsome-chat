@@ -1,21 +1,21 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
-    <div class="navbar-header">
-        <a class="navbar-brand">Handsome chat</a>
-    </div>
+        <div class="navbar-header">
+            <a class="navbar-brand">Handsome chat</a>
+        </div>
 
-    <div ng-if="getCurrentUser()">
-        <ul class="nav navbar-nav navbar-right">
-            <li><p class="navbar-text hidden-xs" ng-bind="getCurrentUser()"></p></li>
-            <li><a class="clickable" ng-click="logout()">Logout</a></li>
-        </ul>
-    </div>
+        <div ng-if="getCurrentUser()">
+            <ul class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text hidden-xs" ng-bind="getCurrentUser()"></p></li>
+                <li><a class="clickable" ng-click="logout()">Logout</a></li>
+            </ul>
+        </div>
 
-    <div ng-if="!getCurrentUser()">
-        <ul class="nav navbar-nav navbar-right">
-            <li ui-sref-active="active"><a ui-sref="login">Login</a></li>
-            <li ui-sref-active="active"><a ui-sref="register">Register</a></li>
-        </ul>
-    </div>
+        <div ng-if="!getCurrentUser()">
+            <ul class="nav navbar-nav navbar-right">
+                <li ui-sref-active="active"><a ui-sref="login">Login</a></li>
+                <li ui-sref-active="active"><a ui-sref="register">Register</a></li>
+            </ul>
+        </div>
     </div>
 </nav>

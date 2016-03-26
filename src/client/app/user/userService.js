@@ -16,6 +16,7 @@
             return Restangular.all('user/register').post(user)
                 .then(function () {
                     $localStorage.user = user.name;
+                    socketService.connect();
                 });
         };
 
