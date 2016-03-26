@@ -14,8 +14,9 @@ function strategyFunction(username, password, cb) {
         .then(function (user) {
             if (!user || user.passwordHash !== passwordHash) {
                 cb(null, false);
+            } else {
+                cb(null, user);
             }
-            cb(null, user);
         })
         .catch(function (err) { cb(err); });
 }
