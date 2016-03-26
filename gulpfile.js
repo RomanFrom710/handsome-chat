@@ -99,4 +99,5 @@ gulp.task('start', function () {
 });
 
 
-gulp.task('default', ['vendor-scripts', 'scripts', 'modules', 'templates', 'less', 'watch', 'start']);
+gulp.task('build', ['vendor-scripts', 'scripts', 'modules', 'templates', 'less']);
+gulp.task('default', ['build', 'watch', 'start']);

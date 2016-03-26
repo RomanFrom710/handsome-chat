@@ -1,3 +1,10 @@
-var localConfig = require('./configs/local');
+var env = process.env.NODE_ENV;
 
-module.exports = localConfig; // todo: add production environment check
+var config;
+if (env === 'production') {
+    config = require('./configs/prod');
+} else {
+    config = require('./configs/local');
+}
+
+module.exports = config;

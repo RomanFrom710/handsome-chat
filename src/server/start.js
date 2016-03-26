@@ -35,5 +35,5 @@ app.use('/api/chat/', authMiddleware, chatRoutes);
 var server = http.createServer(app);
 require('./inits/socket-init')(server);
 
-var port = process.env.PORT || config.port;
+var port = config.port;
 server.listen(port);
