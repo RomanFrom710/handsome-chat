@@ -15,7 +15,6 @@
                     } else {
                         toastr.error(response.data);
                     }
-                    return false;
                 });
                 
             }]);

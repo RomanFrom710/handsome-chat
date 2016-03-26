@@ -9,10 +9,11 @@
         <span ng-bind="message.content"></span>
     </p>
 </div>
-<form ng-submit="send()" name="sendForm" class="input-group">
+<form ng-submit="sendForm.$valid && send()" name="sendForm" class="input-group">
     <input ng-model="currentMessage"
-           class="form-control"
+           class="message-input form-control"
            type="text"
+           not-empty
            placeholder="Enter a message..." />
     <span class="input-group-btn">
         <button type="submit" class="btn btn-primary">Send</button>

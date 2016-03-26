@@ -3,9 +3,9 @@
         .module('user')
         .controller('loginController', loginController);
 
-    loginController.$inject = ['$state', 'userService'];
+    loginController.$inject = ['$scope', '$state', 'userService'];
 
-    function loginController($state, userService) {
+    function loginController($scope, $state, userService) {
         var vm = this;
 
         if (userService.getCurrentUser()) {
@@ -21,7 +21,11 @@
             userService.login(vm.user)
                 .then(function () {
                     $state.go('chat');
+                })
+                .catch(function () {
+                    $scope.loginForm.$setPristine();
+                    vm.user.password = '';
                 });
-        }
+        };
     }
 })();

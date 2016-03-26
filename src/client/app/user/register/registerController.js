@@ -3,25 +3,30 @@
         .module('user')
         .controller('registerController', registerController);
 
-    registerController.$inject = ['$state', 'userService'];
+    registerController.$inject = ['$scope', '$state', 'userService'];
 
-    function registerController($state, userService) {
+    function registerController($scope, $state, userService) {
         var vm = this;
 
         if (userService.getCurrentUser()) {
             $state.go('chat');
         }
-        
-        vm.confirmPassword = '';
+
         vm.user = {
             name: '',
             password: ''
         };
+        vm.confirmPassword = '';
 
         vm.submit = function () {
             userService.register(vm.user)
                 .then(function () {
                     $state.go('chat');
+                })
+                .catch(function () {
+                    $scope.registerForm.$setPristine();
+                    vm.user.password = '';
+                    vm.confirmPassword = '';
                 });
         }
     }
