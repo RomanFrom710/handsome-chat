@@ -39,6 +39,11 @@ function initSocket(server) {
         });
 
         socket.on('message', function (message) {
+            message.content = _.trim(message.content);
+            if (!message) {
+                return;
+            }
+
             userService.findById(userId)
                 .then(function (user) {
                     message.author = _.pick(user, ['id', 'name']);
