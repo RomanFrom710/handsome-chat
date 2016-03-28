@@ -13,7 +13,10 @@ var angularSort = require('gulp-angular-filesort');
 var environments = require('gulp-environments');
 var production = environments.production;
 
+var join = require('path').join;
+
 var compiledPath = 'public/compiled';
+var fontsPath = 'public/fonts';
 
 var vendors = [
     'lodash/lodash.js',
@@ -25,7 +28,7 @@ var vendors = [
     'ngstorage/ngStorage.js',
     'angular-toastr/dist/angular-toastr.tpls.js'
 ];
-vendors = vendors.map(function (path) { return 'bower_components/' + path; });
+vendors = vendors.map(function (path) { return join('bower_components', path); });
 vendors.push('node_modules/socket.io-client/socket.io.js');
 
 var scripts = [
@@ -82,6 +85,11 @@ gulp.task('templates', function() {
        .pipe(gulp.dest(compiledPath));
 });
 
+gulp.task('fonts', function () {
+    return gulp.src('bower_components/bootswatch-dist/fonts/*')
+        .pipe(gulp.dest(fontsPath));
+});
+
 
 gulp.task('watch', function () {
     gulp.watch('src/client/styles/**/*.less', ['less']);
@@ -99,5 +107,5 @@ gulp.task('start', function () {
 });
 
 
-gulp.task('build', ['vendor-scripts', 'scripts', 'modules', 'templates', 'less']);
+gulp.task('build', ['vendor-scripts', 'scripts', 'modules', 'templates', 'less', 'fonts']);
 gulp.task('default', ['build', 'watch', 'start']);

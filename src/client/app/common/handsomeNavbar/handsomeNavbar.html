@@ -6,15 +6,35 @@
 
         <div ng-if="getCurrentUser()">
             <ul class="nav navbar-nav navbar-right">
-                <li><p class="navbar-text hidden-xs" ng-bind="getCurrentUser()"></p></li>
-                <li><a class="clickable" ng-click="logout()">Logout</a></li>
+                <li>
+                    <p class="navbar-text hidden-xs">
+                        <span ng-bind="getCurrentUser()"></span>
+                        <i class="glyphicon glyphicon-user"></i>
+                    </p>
+                </li>
+                <li>
+                    <a class="clickable" ng-click="logout()">
+                        <span>Logout</span>
+                        <i class="glyphicon glyphicon-log-out"></i>
+                    </a>
+                </li>
             </ul>
         </div>
 
         <div ng-if="!getCurrentUser()">
             <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active"><a ui-sref="login">Login</a></li>
-                <li ui-sref-active="active"><a ui-sref="register">Register</a></li>
+                <li ui-sref-active="active">
+                    <a ui-sref="login">
+                        <span>Login</span>
+                        <i class="glyphicon glyphicon-log-in"></i>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="register">
+                        <span>Register</span>
+                        <i class="glyphicon glyphicon-book"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
