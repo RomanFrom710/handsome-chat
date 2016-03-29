@@ -10,10 +10,12 @@
     </p>
 </div>
 <form ng-submit="sendForm.$valid && send()" name="sendForm" class="input-group">
+<form ng-submit="sendForm.$valid && send()" name="sendForm" class="input-group" novalidate>
     <input ng-model="currentMessage"
            class="message-input form-control"
            type="text"
-           not-empty
+           required
+           pattern="[^\s]+"
            placeholder="Enter a message..." />
     <span class="input-group-btn">
         <button type="submit" class="btn btn-primary">Send</button>
