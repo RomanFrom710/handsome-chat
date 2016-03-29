@@ -1,9 +1,7 @@
 var session = require('./session-init');
-var chatService = require('../chat/chat-service');
-var userService = require('../user/user-service');
-var _ = require('lodash');
+var userEventsInit = require('../user/user-events');
+var chatEventsInit = require('../chat/chat-events');
 
-// todo: this file should be refactored
 module.exports = initSocket;
 
 function initSocket(server) {
@@ -22,37 +20,9 @@ function initSocket(server) {
     });
 
     io.on('connection', function (socket) {
-        console.log('connected');
-
         var userId = getUserId(socket);
-        userService.findById(userId)
-            .then(function (user) {
-                var userDto = _.pick(user, ['id', 'name']);
-                chatService.addConnectedUser(userDto);
-                io.emit('joined', userDto);
-            });
-
-        socket.on('disconnect', function () {
-            chatService.removeConnectedUser(userId);
-            io.emit('left', userId);
-            console.log('disconnect');
-        });
-
-        socket.on('message', function (message) {
-            message.content = _.trim(message.content);
-            if (!message) {
-                return;
-            }
-
-            userService.findById(userId)
-                .then(function (user) {
-                    message.author = _.pick(user, ['id', 'name']);
-                    message.created = new Date();
-                    io.emit('message', message);
-                });
-
-            chatService.post(message.content, userId);
-        });
+        userEventsInit(io, socket, userId);
+        chatEventsInit(io, socket, userId);
     });
 }
 
