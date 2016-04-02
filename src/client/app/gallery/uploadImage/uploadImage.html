@@ -1,0 +1,13 @@
+<div class="upload-image">
+    <button class="btn btn-primary" file-upload-button="upload-image">
+        Select Photo
+    </button>
+
+    <image-preview file-input="upload-image" class="image-preview"></image-preview>
+
+    <input type="file"
+           class="hidden"
+           id="upload-image"
+           nv-file-select
+           uploader="vm.uploader" />
+</div>

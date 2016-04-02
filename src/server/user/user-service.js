@@ -1,4 +1,4 @@
-var hashService= require('./password-hash-service');
+var hashService = require('./password-hash-service');
 var userRepository = require('./user-repository');
 
 exports.findById = function (id) {

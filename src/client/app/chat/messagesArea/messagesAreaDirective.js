@@ -3,9 +3,9 @@
         .module('chat')
         .directive('messagesArea', messagesAreaDirective);
 
-    messagesAreaDirective.$inject = ['userService', 'chatService', '$timeout', 'lodash', 'environment'];
+    messagesAreaDirective.$inject = ['userService', 'chatService', '$timeout', 'lodash', '$uibModal', 'environment'];
 
-    function messagesAreaDirective(userService, chatService, $timeout, _, env) {
+    function messagesAreaDirective(userService, chatService, $timeout, _, $uibModal, env) {
         return {
             restrict: 'E',
             templateUrl: env.templatesUrl + 'chat/messagesArea/messagesArea.html',
@@ -38,6 +38,19 @@
                     });
                     messagesElement.scrollTop = messagesElement.scrollHeight;
                 });
+
+                scope.openImageUpload = function () {
+                    $uibModal.open({
+                        templateUrl: env.templatesUrl + 'gallery/uploadImage/uploadImage.html',
+                        controller: 'uploadImageController',
+                        controllerAs: 'vm',
+                        resolve: {
+                            fileRules: ['galleryService', function (galleryService) {
+                                return galleryService.getFileRules();
+                            }]
+                        }
+                    });
+                };
             }
         }
     }

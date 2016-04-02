@@ -10,6 +10,7 @@
         'restangular',
         'ngStorage',
         'ngAnimate',
+        'angularFileUpload',
         'toastr'
     ];
     angular

@@ -9,8 +9,12 @@
         <span ng-bind="message.content"></span>
     </p>
 </div>
-<form ng-submit="sendForm.$valid && send()" name="sendForm" class="input-group">
 <form ng-submit="sendForm.$valid && send()" name="sendForm" class="input-group" novalidate>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-primary" ng-click="openImageUpload()">
+            <i class="glyphicon glyphicon-picture"></i>
+        </button>
+    </span>
     <input ng-model="currentMessage"
            class="message-input form-control"
            type="text"

@@ -26,6 +26,7 @@ var vendors = [
     'angular-animate/angular-animate.js',
     'angular-bootstrap/ui-bootstrap-tpls.js',
     'ngstorage/ngStorage.js',
+    'angular-file-upload/dist/angular-file-upload.js',
     'angular-toastr/dist/angular-toastr.tpls.js'
 ];
 vendors = vendors.map(function (path) { return join('bower_components', path); });
