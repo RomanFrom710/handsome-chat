@@ -5,8 +5,15 @@ var config = {
         name: 'handsomeSession',
         secret: 'jsIsHandsome'
     },
+    useCloudinary: false,
     application: {
-        lastMessagesCount: 5
+        lastMessagesCount: 5,
+        images: {
+            maxUploadSize: 2 * 1024 * 1024, // 2 Mb
+            allowedExtensions: ['jpg', 'jpeg', 'png'],
+            previewHeight: 150,
+            previewQuality: 70
+        }
     }
 };
 

@@ -30,6 +30,9 @@ app.use('/api/user/', userRoutes);
 var chatRoutes = require('./chat/chat-routes');
 app.use('/api/chat/', authMiddleware, chatRoutes);
 
+var galleryRoutes = require('./gallery/gallery-routes');
+app.use('/api/gallery/', authMiddleware, galleryRoutes);
+
 
 // Starting server
 var server = http.createServer(app);

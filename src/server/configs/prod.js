@@ -1,13 +1,12 @@
+var localConfig = require('./local');
+// Some values are the same in local and prod config.
+
 var config = {
-    mongoConnectionString: process.env.MONGODB || 'mongodb://127.0.0.1/handsomechat',
+    mongoConnectionString: process.env.MONGODB || localConfig.mongoConnectionString,
     port: process.env.PORT || 80,
-    session: {
-        name: 'handsomeSession',
-        secret: 'jsIsHandsome'
-    },
-    application: {
-        lastMessagesCount: 5
-    }
+    session: localConfig.session,
+    useCloudinary: true,
+    application: localConfig.application
 };
 
 module.exports = config;
