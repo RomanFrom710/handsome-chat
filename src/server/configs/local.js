@@ -11,7 +11,7 @@ var config = {
     application: {
         lastMessagesCount: 5,
         images: {
-            maxUploadSize: 2 * 1024 * 1024, // 2 Mb
+            maxUploadSize: 1024 * 1024, // 1 Mb
             allowedExtensions: ['jpg', 'jpeg', 'png'],
             previewHeight: 150,
             previewQuality: 70
