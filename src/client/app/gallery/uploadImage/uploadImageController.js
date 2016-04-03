@@ -15,13 +15,13 @@
 
         vm.allowedExtensions = fileRules.allowedExtensions;
         vm.maxSize = fileRules.maxSize;
-        vm.image = null;
+        vm.imagePreviewApi = {};
         
         var uploader = new FileUploader();
         initUploaderFilters();
-
+        uploader.url = env.apiUrl + 'gallery/upload';
+        uploader.autoUpload = true;
         uploader.onWhenAddingFileFailed = handleUploadError;
-        uploader.onAfterAddingFile = handleUploading;
         uploader.onSuccessItem = handleSuccessUpload;
 
         vm.uploader = uploader;
@@ -30,7 +30,7 @@
             uploader.filters.push({
                 name: extensionsFilterName,
                 fn: function (item) {
-                    var extension = _.last(item.name.split('.'));
+                    var extension = _.last(item.name.split('.')).toLowerCase();
                     return _.indexOf(vm.allowedExtensions, extension) !== -1;
                 }
             });
@@ -55,16 +55,12 @@
                 errorMessage = 'Error while uploading file.';
             }
 
+            vm.imagePreviewApi.remove();
             toastr.error(errorMessage);
         }
 
-        function handleUploading(item) {
-            item.url = env.apiUrl + 'gallery/upload';
-            item.upload();
-        }
-
         function handleSuccessUpload(item, response) {
-
+            vm.imagePreviewApi.update();
         }
     }
 })();

@@ -15,9 +15,9 @@
 
         while (size >= 1024) {
             size /= 1024;
-            unit ++;
+            unit++;
         }
 
-        return bytes.toFixed(precision) + ' ' + units[unit];
+        return size.toFixed(precision) + ' ' + units[unit];
     }
 })();

@@ -22,8 +22,7 @@
                 scope.currentUser = userService.getCurrentUser();
 
                 scope.send = function () {
-                    var message = _.trim(scope.currentMessage);
-                    chatService.sendMessage(message);
+                    chatService.sendMessage(scope.currentMessage);
                     scope.currentMessage = '';
                     inputElement.focus();
                 };
@@ -46,6 +45,7 @@
                         templateUrl: env.templatesUrl + 'gallery/uploadImage/uploadImage.html',
                         controller: 'uploadImageController',
                         controllerAs: 'vm',
+                        size: 'lg',
                         resolve: {
                             fileRules: ['galleryService', function (galleryService) {
                                 return galleryService.getFileRules();

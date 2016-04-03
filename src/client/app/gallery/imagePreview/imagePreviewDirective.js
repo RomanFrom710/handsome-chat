@@ -5,34 +5,37 @@
         .module('gallery')
         .directive('imagePreview', imagePreviewDirective);
 
-    imagePreviewDirective.$inject = ['lodash'];
+    imagePreviewDirective.$inject = ['lodash', '$window', 'environment'];
 
-    function imagePreviewDirective(_) {
+    var placeholder = '/images/placeholder.png';
+
+    function imagePreviewDirective(_, $window, env) {
         return {
             restrict: 'E',
             scope: {
-                fileInput: '@'
+                fileInput: '@',
+                api: '='
             },
             replace: true,
-            template: '<img ng-show="visible" class="image-preview" />',
+            templateUrl: env.templatesUrl + 'gallery/imagePreview/imagePreview.html',
             link: function (scope, element) {
-                var fileUploadElement = angular.element(document.getElementById(scope.fileInput));
+                var fileUploadElement = document.getElementById(scope.fileInput);
+                scope.imageData = placeholder;
 
-                fileUploadElement.on('change', function () {
-                    var isImage = this.files &&
-                                  this.files[0] &&
-                                  _.startsWith(this.files[0].type, 'image');
-                    if (!isImage) {
+                var apiObject = scope.api || {};
+                apiObject.update = function () {
+                    var files = fileUploadElement.files;
+                    if (!(files && files[0])) {
+                        scope.imageData = placeholder;
                         return;
                     }
-                    scope.visible = true;
 
-                    var reader = new FileReader();
-                    reader.onload = function (event) {
-                        element.attr('src', event.target.result);
-                    };
-                    reader.readAsDataURL(this.files[0]);
-                });
+                    scope.imageData = $window.URL.createObjectURL(files[0]);
+                };
+
+                apiObject.remove = function () {
+                    scope.imageData = placeholder;
+                }
             }
         }
     }
