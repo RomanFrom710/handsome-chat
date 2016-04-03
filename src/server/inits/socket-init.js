@@ -1,3 +1,5 @@
+'use strict';
+
 var session = require('./session-init');
 var userEventsInit = require('../user/user-events');
 var chatEventsInit = require('../chat/chat-events');

@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     var env = {
         apiUrl: '/api/',
         // Templates will be cached and stored in 'compiled' folder,

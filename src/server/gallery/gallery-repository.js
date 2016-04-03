@@ -1,3 +1,5 @@
+'use strict';
+
 var User = require('../user/user-model');
 
 exports.getUserImages = function (userId) {

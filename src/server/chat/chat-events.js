@@ -1,3 +1,5 @@
+'use strict';
+
 var userService = require('../user/user-service');
 var chatService = require('./chat-service');
 var _ = require('lodash');

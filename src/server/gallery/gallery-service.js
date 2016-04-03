@@ -1,3 +1,5 @@
+'use strict';
+
 var galleryRepository = require('./gallery-repository');
 var config = require('../config');
 

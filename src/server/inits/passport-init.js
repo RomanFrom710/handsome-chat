@@ -1,3 +1,5 @@
+'use strict';
+
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var userService = require('../user/user-service');

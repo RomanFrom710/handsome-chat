@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     angular
         .module('handsome-chat')
         .config(['$stateProvider', '$urlRouterProvider', 'environment',

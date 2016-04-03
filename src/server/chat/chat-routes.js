@@ -1,3 +1,5 @@
+'use strict';
+
 var router = require('express').Router();
 var chatService = require('./chat-service');
 var _ = require('lodash');

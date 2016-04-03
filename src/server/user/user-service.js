@@ -1,3 +1,5 @@
+'use strict';
+
 var hashService = require('./password-hash-service');
 var userRepository = require('./user-repository');
 

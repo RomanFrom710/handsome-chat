@@ -1,3 +1,5 @@
+'use strict';
+
 var cloudinary = require('cloudinary');
 var config = require('../config');
 

@@ -1,3 +1,5 @@
+'use strict';
+
 var Room = require('./room-model');
 
 exports.createRoom = function (name) {

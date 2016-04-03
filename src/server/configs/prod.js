@@ -1,3 +1,5 @@
+'use strict';
+
 var localConfig = require('./local');
 // Some values are the same in local and prod config.
 

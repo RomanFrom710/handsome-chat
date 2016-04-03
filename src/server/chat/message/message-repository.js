@@ -1,3 +1,5 @@
+'use strict';
+
 var Message = require('./message-model');
 var _ = require('lodash');
 

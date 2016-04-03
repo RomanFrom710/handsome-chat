@@ -1,3 +1,5 @@
+'use strict';
+
 var galleryService = require('./gallery-service');
 var router = require('express').Router();
 
