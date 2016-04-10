@@ -11,6 +11,10 @@
     var precision = 2;
 
     function fileSizeFilter(size) {
+        if (!size) {
+            return '0 ' + units[0];
+        }
+
         var unit = 0;
 
         while (size >= 1024) {

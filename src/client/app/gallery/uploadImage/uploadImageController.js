@@ -16,14 +16,34 @@
         vm.allowedExtensions = fileRules.allowedExtensions;
         vm.maxSize = fileRules.maxSize;
         vm.imagePreviewApi = {};
+
+        vm.progress = {
+            isLoading: false,
+            value: 0,
+            maxValue: 0
+        };
         
         var uploader = new FileUploader();
         initUploaderFilters();
         uploader.url = env.apiUrl + 'gallery/upload';
         uploader.autoUpload = true;
         uploader.onWhenAddingFileFailed = handleValidationError;
-        uploader.onSuccessItem = handleSuccessUpload;
-        uploader.onErrorItem = handleUploadError;
+
+        uploader.onSuccessItem = function (item, response) {
+            vm.imagePreviewApi.update();
+            vm.progress.isLoading = false;
+        };
+        uploader.onErrorItem = function (item, response) {
+            toastr.error(response);
+        };
+        uploader.onBeforeUploadItem = function (item) {
+            vm.progress.isLoading = true;
+            vm.progress.value = 0;
+            vm.progress.maxValue = item.file.size;
+        };
+        uploader.onProgressItem = function (item, progress) {
+            vm.progress.value = item.file.size * progress / 100;
+        };
 
         vm.uploader = uploader;
 
@@ -60,12 +80,5 @@
             toastr.error(errorMessage);
         }
 
-        function handleUploadError(item, response) {
-            toastr.error(response);
-        }
-
-        function handleSuccessUpload(item, response) {
-            vm.imagePreviewApi.update();
-        }
     }
 })();

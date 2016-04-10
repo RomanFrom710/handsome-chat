@@ -17,6 +17,15 @@
                     <button class="btn btn-primary">Send</button>
                 </div>
             </div>
+            <div class="upload-progress">
+                <uib-progressbar ng-show="vm.progress.isLoading"
+                                 value="vm.progress.value"
+                                 max="vm.progress.maxValue">
+                    <span class="progress-bar-text" ng-show="vm.progress.value">
+                        {{vm.progress.value | fileSize}} / {{vm.progress.maxValue | fileSize}}
+                    </span>
+                </uib-progressbar>
+            </div>
             <textarea class="form-control" placeholder="Description..."></textarea>
         </div>
 
