@@ -4,9 +4,9 @@ var env = process.env.NODE_ENV;
 
 var config;
 if (env === 'production') {
-    config = require('./configs/prod');
+    config = require('./prod');
 } else {
-    config = require('./configs/local');
+    config = require('./local');
 }
 
 module.exports = config;

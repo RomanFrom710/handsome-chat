@@ -21,8 +21,9 @@
         initUploaderFilters();
         uploader.url = env.apiUrl + 'gallery/upload';
         uploader.autoUpload = true;
-        uploader.onWhenAddingFileFailed = handleUploadError;
+        uploader.onWhenAddingFileFailed = handleValidationError;
         uploader.onSuccessItem = handleSuccessUpload;
+        uploader.onErrorItem = handleUploadError;
 
         vm.uploader = uploader;
 
@@ -43,7 +44,7 @@
             })
         }
 
-        function handleUploadError(item, filter) {
+        function handleValidationError(item, filter) {
             var errorMessage;
             if (filter.name === extensionsFilterName) {
                 errorMessage = 'Wrong file extension! Supported extensions are: ';
@@ -57,6 +58,10 @@
 
             vm.imagePreviewApi.remove();
             toastr.error(errorMessage);
+        }
+
+        function handleUploadError(item, response) {
+            toastr.error(response);
         }
 
         function handleSuccessUpload(item, response) {
