@@ -17,7 +17,7 @@ exports.getImage = function (userId, imageId) {
 
 exports.uploadImage = function (imageDto) {
     return new Promise(function (resolve) {
-        exports.validateImage(imageDto.imageFile);
+        validateImage(imageDto.imageFile);
         resolve(imageUploadServie.upload(imageDto.imageFile.buffer));
     })
     .then(function (imageData) {
@@ -37,7 +37,8 @@ exports.getFileRules = function () {
     };
 };
 
-exports.validateImage = function (imageFile) {
+
+function validateImage (imageFile) {
     var rules = exports.getFileRules();
 
     var isValidSize = imageFile.size < rules.maxSize;
