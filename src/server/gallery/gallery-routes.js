@@ -8,10 +8,12 @@ module.exports = router;
 
 var multerMiddleware = multer({ storage: multer.memoryStorage() }).single('file');
 router.route('/upload').post(multerMiddleware, function (req, res) {
-    var file = req.file;
-    var userId = req.user.id;
+    var imageDto = {
+        userId: req.user.id,
+        imageFile: req.file
+    };
     
-    galleryService.uploadImage(userId, file)
+    galleryService.uploadImage(imageDto)
         .then(function (imagePaths) {
             res.send(imagePaths);
         })
@@ -23,4 +25,16 @@ router.route('/upload').post(multerMiddleware, function (req, res) {
 router.route('/filerules').get(function (req, res) {
     var rules = galleryService.getFileRules();
     res.send(rules);
+});
+
+router.route('/:imageId').get(function (req, res) {
+    var imageId = req.params.imageId;
+    var userId = req.user.id;
+    galleryService.getImage(userId, imageId)
+        .then(function (userImage) {
+            res.send(userImage);
+        })
+        .catch(function () {
+            res.status(404).send('Image not found!');
+        });
 });

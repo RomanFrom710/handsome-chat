@@ -15,10 +15,18 @@ exports.getImage = function (userId, imageId) {
     return galleryRepository.getImage(userId, imageId);
 };
 
-exports.uploadImage = function (userId, imageFile) {
+exports.uploadImage = function (imageDto) {
     return new Promise(function (resolve) {
-        exports.validateImage(imageFile);
-        resolve(imageUploadServie.upload(imageFile.buffer));
+        exports.validateImage(imageDto.imageFile);
+        resolve(imageUploadServie.upload(imageDto.imageFile.buffer));
+    })
+    .then(function (imageData) {
+        var image = {
+            url: imageData.original,
+            previewUrl: imageData.preview,
+            description: imageDto.description
+        };
+        return galleryRepository.saveImage(imageDto.userId, image);
     });
 };
 

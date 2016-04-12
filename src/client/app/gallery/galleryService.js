@@ -15,7 +15,7 @@
                 deferred.resolve(fileRules);
                 return deferred.promise;
             } else {
-                return Restangular.one('gallery/filerules').get()
+                return Restangular.one('gallery').one('filerules').get()
                     .then(function (response) {
                         fileRules = response; // Caching file rules.
                         return response;
@@ -23,6 +23,12 @@
             }
         };
         
-        
+        this.getImage = function (imageId, userId) {
+            if (userId) {
+
+            } else {
+                return Restangular.one('gallery', imageId).get();
+            }
+        };
     }
 })();

@@ -5,9 +5,9 @@
         .module('chat')
         .directive('messagesArea', messagesAreaDirective);
 
-    messagesAreaDirective.$inject = ['userService', 'chatService', '$timeout', 'lodash', '$uibModal', 'environment'];
+    messagesAreaDirective.$inject = ['userService', 'chatService', '$timeout', '$uibModal', 'environment'];
 
-    function messagesAreaDirective(userService, chatService, $timeout, _, $uibModal, env) {
+    function messagesAreaDirective(userService, chatService, $timeout, $modal, env) {
         return {
             restrict: 'E',
             templateUrl: env.templatesUrl + 'chat/messagesArea/messagesArea.html',
@@ -41,8 +41,8 @@
                 });
 
                 scope.openImageUpload = function () {
-                    $uibModal.open({
-                        templateUrl: env.templatesUrl + 'gallery/uploadImage/uploadImage.html',
+                    $modal.open({
+                        templateUrl: env.templatesUrl + 'gallery/image/upload/uploadImage.html',
                         controller: 'uploadImageController',
                         controllerAs: 'vm',
                         size: 'lg',
