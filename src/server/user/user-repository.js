@@ -14,6 +14,6 @@ exports.findByName = function (name) {
         .select('-images');
 };
 
-exports.createUser = function (name, passwordHash) {
-    return User.create({ name: name, passwordHash: passwordHash });
+exports.createUser = function (userDto) {
+    return User.create({ name: userDto.name, passwordHash: userDto.passwordHash });
 };

@@ -19,7 +19,11 @@ function initChatEvents (io, socket, userId) {
                 message.created = new Date();
                 io.emit('message', message);
             });
-
-        chatService.post(message.content, userId);
+        
+        var messageDto = {
+            content: message.content,
+            userId: userId
+        };
+        chatService.post(messageDto);
     });
 }

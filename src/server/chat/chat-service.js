@@ -4,8 +4,8 @@ var messageRepository = require('./message/message-repository');
 var config = require('../config');
 var _ = require('lodash');
 
-exports.post = function (message, userId) {
-    return messageRepository.post(message, userId);
+exports.post = function (messageDto) {
+    return messageRepository.post(messageDto);
 };
 
 exports.getLastMessages = function () {

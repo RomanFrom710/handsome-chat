@@ -11,18 +11,18 @@ exports.findByName = function (name) {
     return userRepository.findByName(name);
 };
 
-exports.createUser = function (name, password) {
-    if (!name) {
+exports.createUser = function (userDto) {
+    if (!userDto.name) {
         throw new Error('Name cannot be empty!');
     }
 
-    var passwordHash = hashService.getHash(password);
+    userDto.passwordHash = hashService.getHash(userDto.password);
 
-    return userRepository.findByName(name)
+    return userRepository.findByName(userDto.name)
         .then(function (user) {
            if (user) {
                throw new Error('There is already the user with such name!');
            }
-           return userRepository.createUser(name, passwordHash);
+           return userRepository.createUser(userDto);
         });
 };

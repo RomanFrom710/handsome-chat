@@ -21,7 +21,11 @@ router.route('/login').post(function (req, res, next) {
 });
 
 router.route('/register').post(function (req, res) {
-    userService.createUser(req.body.name, req.body.password)
+    var userDto = {
+        name: req.body.name,
+        password: req.body.password
+    };
+    userService.createUser(userDto)
         .then(function (user) {
             req.login(user, function () {
                 res.send(true);

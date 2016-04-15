@@ -3,10 +3,10 @@
 var Message = require('./message-model');
 var _ = require('lodash');
 
-exports.post = function (content, userId) {
+exports.post = function (messageDto) {
     return Message.create({
-        content: content,
-        author: userId
+        content: messageDto.content,
+        author: messageDto.userId
     });
 };
 
