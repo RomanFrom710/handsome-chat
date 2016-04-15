@@ -25,7 +25,9 @@ exports.getImage = function (userId, imageId) {
         });
 };
 
-exports.saveImage = function(userId, imageDto) {
+exports.saveImage = function (imageDto) {
+    var userId = imageDto.userId;
+    delete imageDto.userId;
     return User
         .findByIdAndUpdate(
             userId,
@@ -35,4 +37,12 @@ exports.saveImage = function(userId, imageDto) {
         .then(function (user) {
             return user.images[0].id;
         });
+};
+
+exports.updateImage = function (imageDto) {
+    return User
+        .findOneAndUpdate(
+            { '_id': imageDto.userId, 'images._id': imageDto.id },
+            { $set: { 'images.$.description': imageDto.description }}
+        );
 };

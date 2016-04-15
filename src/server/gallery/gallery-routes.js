@@ -38,3 +38,18 @@ router.route('/:imageId').get(function (req, res) {
             res.status(404).send('Image not found!');
         });
 });
+
+router.route('/:imageId').put(function (req, res) {
+    var imageDto = {
+        id: req.params.imageId,
+        userId: req.user.id,
+        description: req.body.description
+    };
+    galleryService.updateImage(imageDto)
+        .then(function () {
+            res.send(true);
+        })
+        .catch(function () {
+            res.status(500).send('Error while updating image!');
+        });
+});

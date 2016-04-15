@@ -30,5 +30,9 @@
                 return Restangular.one('gallery', imageId).get();
             }
         };
+        
+        this.updateImage = function (imageId, imageDto) {
+            return Restangular.one('gallery', imageId).customPUT(imageDto);
+        };
     }
 })();

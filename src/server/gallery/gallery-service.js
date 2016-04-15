@@ -21,13 +21,18 @@ exports.uploadImage = function (imageDto) {
         resolve(imageUploadServie.upload(imageDto.imageFile.buffer));
     })
     .then(function (imageData) {
-        var image = {
+        var newImageDto = {
             url: imageData.original,
             previewUrl: imageData.preview,
+            userId: imageDto.userId,
             description: imageDto.description
         };
-        return galleryRepository.saveImage(imageDto.userId, image);
+        return galleryRepository.saveImage(newImageDto);
     });
+};
+
+exports.updateImage = function (imageDto) {
+    return galleryRepository.updateImage(imageDto);
 };
 
 exports.getFileRules = function () {
@@ -51,4 +56,4 @@ function validateImage (imageFile) {
     if (!isValidExtension) {
         throw new Error('Wrong file extension!');
     }
-};
+}
