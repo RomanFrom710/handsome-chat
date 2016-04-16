@@ -38,7 +38,7 @@
                 vm.progress.isLoading = false;
                 toastr.success('The image was successfully uploaded!');
                 $scope.$close();
-                $state.go('chat.editImage', { id: response });
+                $state.go('chat.singleImage', { id: response });
             };
             uploader.onErrorItem = function (item, response) {
                 toastr.error(response);

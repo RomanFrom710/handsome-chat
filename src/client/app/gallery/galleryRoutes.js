@@ -6,8 +6,8 @@
         .config(['modalStateProvider', 'environment',
             function (modalStateProvider, env) {
                 modalStateProvider
-                    .state('chat.editImage', {
-                        url: 'editImage/:id',
+                    .state('chat.singleImage', {
+                        url: 'image/:id',
                         templateUrl: env.templatesUrl + 'gallery/image/viewEdit/viewEditImage.html',
                         controller: 'viewEditImageController',
                         controllerAs: 'vm',

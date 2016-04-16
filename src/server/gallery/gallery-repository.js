@@ -21,6 +21,8 @@ exports.getImage = function (userId, imageId) {
                 id: user.id,
                 name: user.name
             };
+            imageDto.id = imageDto._id;
+            delete imageDto._id;
             return imageDto;
         });
 };
