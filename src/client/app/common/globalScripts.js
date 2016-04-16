@@ -3,10 +3,10 @@
 
     angular
         .module('common')
-        .factory('lodash', function () {
-            return _;
+        .provider('lodash', function () {
+            this.$get = function () { return _; };
         })
-        .factory('io', function () {
-            return io;
+        .provider('io', function () {
+            this.$get = function () { return io; };
         });
 })();
