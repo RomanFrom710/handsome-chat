@@ -19,7 +19,7 @@
         this.state = function (name, options) {
             var modal = null;
 
-            var inject = ['$uibModal', '$state'];
+            var inject = ['$uibModal', '$state', '$timeout'];
             var resolveKeys = [];
             if (options.resolve) {
                 resolveKeys = _.keys(options.resolve);
@@ -35,18 +35,23 @@
                 onExit: onExit
             });
 
-            function onEnter($modal, $state) {
+            function onEnter($modal, $state, $timeout) {
                 // Get injected resolve results.
                 var resolveValues = _.slice(arguments, inject.length);
                 // Pass them into modal.
                 options.resolve = _.zipObject(resolveKeys, resolveValues);
 
-                modal = $modal.open(options);
-                modal.result.finally(function () {
-                    if (modal) {
-                        $state.go('^');
-                        modal = null;
-                    }
+                $timeout(function () {
+                    // Wait for event loop ending. This will prevent bug with state.reload,
+                    // when previous modal's promise is called after new modal is opened,
+                    // so it goes to the parent state.
+                    modal = $modal.open(options);
+                    modal.result.finally(function () {
+                        if (modal) {
+                            $state.go('^');
+                            modal = null;
+                        }
+                    });
                 });
             }
 
