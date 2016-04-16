@@ -2,7 +2,7 @@
     <p ng-repeat="message in messages track by $index"
        ng-class="{'my-message': message.author.name === currentUser}"
        class="message card"
-       uib-popover="{{message.created | date : 'HH:mm:ss'}}"
+       uib-popover="{{message.created | handsomeDate}}"
        popover-placement="{{message.author.name === currentUser ? 'left' : 'right'}}"
        popover-trigger="mouseenter">
         <strong ng-bind="message.author.name"></strong>:

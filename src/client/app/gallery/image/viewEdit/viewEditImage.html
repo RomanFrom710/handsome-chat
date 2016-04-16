@@ -1,5 +1,7 @@
 <div class="view-edit-image handsome-modal">
-    <h2 class="title">{{vm.image.author.name}} ({{vm.image.created | date : 'd/M/yy'}})</h2>
+    <h2 class="title">
+        {{vm.image.author.name}} ({{vm.image.created | handsomeDate}})
+    </h2>
     <div class="card">
         <div class="col-md-8 image-view">
             <img ng-src="{{vm.image.url}}" alt="User's image" />

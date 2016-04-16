@@ -17,7 +17,7 @@
                 api: '='
             },
             replace: true,
-            templateUrl: env.templatesUrl + 'gallery/imagePreview/imagePreview.html',
+            templateUrl: env.templatesUrl + 'gallery/image/preview/imagePreview.html',
             link: function (scope, element) {
                 var fileUploadElement = document.getElementById(scope.fileInput);
                 scope.imageData = placeholder;
