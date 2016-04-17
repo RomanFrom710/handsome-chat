@@ -1,27 +1,39 @@
 <div class="view-edit-image handsome-modal">
     <h2 class="title">
-        {{vm.image.author.name}} ({{vm.image.created | handsomeDate}})
+        {{vm.image.author.name}} (Uploaded: {{vm.image.created | handsomeDate}})
     </h2>
-    <div class="card">
+    <div class="card content">
         <div class="col-md-8 image-view">
             <img ng-src="{{vm.image.url}}" alt="User's image" />
         </div>
-        <div class="col-md-4">
-            <div class="buttons btn-group btn-group-justified">
+        <div class="col-md-4 image-info">
+            <div class="btn-group-justified">
                 <div class="btn-group">
                     <button class="btn btn-default" ng-click="vm.close()">
                         Close
                     </button>
                 </div>
+            </div>
+            <div class="description">
+                <p ng-bind="vm.image.description"
+                   ng-if="!vm.canEdit"></p>
+                <textarea class="form-control"
+                          placeholder="Description..."
+                          ng-if="vm.canEdit"
+                          ng-disabled="!vm.editMode"
+                          ng-model="vm.image.description"></textarea>
+            </div>
+            <div class="btn-group-justified" ng-show="vm.editMode">
                 <div class="btn-group">
-                    <button ng-click="vm.save()" class="btn btn-primary">
+                    <button ng-click="vm.save()"  class="btn btn-primary">
                         Save
                     </button>
                 </div>
             </div>
-            <textarea class="form-control"
-                      placeholder="Description..."
-                      ng-model="vm.image.description"></textarea>
+        </div>
+        <div class="icon-buttons" ng-if="vm.canEdit">
+            <span class="glyphicon glyphicon-pencil" ng-click="vm.triggerEditMode()"></span>
+            <span class="glyphicon glyphicon-trash"></span>
         </div>
     </div>
 </div>

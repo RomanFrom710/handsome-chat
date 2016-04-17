@@ -10,7 +10,36 @@
     }
   }
 
-  .buttons {
+  .image-info div {
     margin-bottom: 30px;
+  }
+
+  .content {
+    position: relative;
+  }
+
+  .icon-buttons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: @card-padding;
+
+    .glyphicon {
+      font-size: @large-icons-size;
+      margin-left: 20px;
+      cursor: pointer;
+
+      &:hover {
+        color: @large-icons-hover-color;
+      }
+    }
+  }
+
+  .description {
+    font-size: @large-text-size;
+
+    textarea {
+      font-size: inherit;
+    }
   }
 }

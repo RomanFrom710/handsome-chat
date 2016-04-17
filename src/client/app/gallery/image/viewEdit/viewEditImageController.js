@@ -5,23 +5,33 @@
         .module('gallery')
         .controller('viewEditImageController', viewEditImageController);
 
-    viewEditImageController.$inject = ['$state', 'galleryService', 'image', 'toastr'];
+    viewEditImageController.$inject = ['$state', 'galleryService', 'userService', 'image', 'toastr'];
 
-    function viewEditImageController($state, galleryService, image, toastr) {
+    function viewEditImageController($state, galleryService, userService, image, toastr) {
         var vm = this;
         vm.image = image;
+        
+        vm.editMode = false;
+        vm.canEdit = userService.getCurrentUser() === image.author.name;
 
         vm.save = function () {
             var imageDto = { description: vm.image.description };
             galleryService.updateImage(vm.image.id, imageDto)
                 .then(function () {
                     toastr.success('The image was successfully updated!');
-                    $state.go('^');
+                    vm.editMode = false;
+                })
+                .catch(function () {
+                    $state.reload();
                 });
         };
         
         vm.close = function () {
             $state.go('^');
         };
+        
+        vm.triggerEditMode = function () {
+            vm.editMode = !vm.editMode;
+        }
     }
 })();
