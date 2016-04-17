@@ -10,22 +10,33 @@
     function UserService(Restangular, $localStorage, socketService) {
         var self = this;
 
-        if (getCurrentUser()) {
+        // todo: refactor current user methods
+        this.getCurrentUser = function () {
+            return $localStorage.userName || null;
+        };
+        
+        this.getCurrentUserId = function () {
+            return $localStorage.userId || null;
+        };
+        
+        if (this.getCurrentUser()) {
             socketService.connect();
         }
         
         this.register = function (user) {
             return Restangular.all('user/register').post(user)
-                .then(function () {
-                    $localStorage.user = user.name;
+                .then(function (userId) {
+                    $localStorage.userName = user.name;
+                    $localStorage.userId = userId;
                     socketService.connect();
                 });
         };
 
         this.login = function (user) {
             return Restangular.all('user/login').post(user)
-                .then(function () {
-                    $localStorage.user = user.name;
+                .then(function (userId) {
+                    $localStorage.userName = user.name;
+                    $localStorage.userId = userId;
                     socketService.connect();
                 });
         };
@@ -37,17 +48,12 @@
                 });
         };
 
-        this.getCurrentUser = getCurrentUser;
-
         this.resetCurrentUser = function () {
-            if ($localStorage.user) {
-                delete $localStorage.user;
+            if (self.getCurrentUser()) {
+                delete $localStorage.userName;
+                delete $localStorage.userId;
                 socketService.disconnect();
             }
         };
-
-        function getCurrentUser () {
-            return $localStorage.user || null;
-        }
     }
 })();

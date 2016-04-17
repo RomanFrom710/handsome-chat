@@ -5,13 +5,13 @@
         .module('gallery')
         .controller('uploadImageController', uploadImageController);
 
-    uploadImageController.$inject = ['$scope', '$state', '$filter', 'FileUploader',
+    uploadImageController.$inject = ['$scope', '$state', '$filter', 'FileUploader', 'userService',
         'fileRules', 'lodash', 'toastr', 'environment'];
 
     var sizeFilterName = 'sizeFilter';
     var extensionsFilterName = 'extensionsFilter';
 
-    function uploadImageController($scope, $state, $filter, FileUploader, fileRules, _, toastr, env) {
+    function uploadImageController($scope, $state, $filter, FileUploader, userService, fileRules, _, toastr, env) {
         var vm = this;
 
         vm.allowedExtensions = fileRules.allowedExtensions;
@@ -38,7 +38,8 @@
                 vm.progress.isLoading = false;
                 toastr.success('The image was successfully uploaded!');
                 $scope.$close();
-                $state.go('chat.singleImage', { id: response });
+                var userId = userService.getCurrentUserId();
+                $state.go('chat.singleImage', { userId: userId, imageId: response });
             };
             uploader.onErrorItem = function (item, response) {
                 toastr.error(response);

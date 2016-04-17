@@ -11,6 +11,10 @@ exports.findByName = function (name) {
     return userRepository.findByName(name);
 };
 
+exports.getUserProfile = function (userId) {
+    return userRepository.getUserProfile(userId);
+};
+
 exports.createUser = function (userDto) {
     if (!userDto.name) {
         throw new Error('Name cannot be empty!');

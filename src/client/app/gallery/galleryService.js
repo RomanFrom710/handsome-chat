@@ -23,12 +23,8 @@
             }
         };
         
-        this.getImage = function (imageId, userId) {
-            if (userId) {
-
-            } else {
-                return Restangular.one('gallery', imageId).get();
-            }
+        this.getImage = function (userId, imageId) {
+            return Restangular.one('gallery', userId).one(imageId).get();
         };
         
         this.updateImage = function (imageId, imageDto) {
@@ -37,6 +33,10 @@
         
         this.deleteImage = function (imageId) {
             return Restangular.one('gallery', imageId).remove();
+        };
+
+        this.getProfile = function (userId) {
+            return Restangular.one('user', userId).get();
         };
     }
 })();

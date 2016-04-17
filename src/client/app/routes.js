@@ -35,7 +35,7 @@
 
                 modalStateProvider
                     .state('chat.singleImage', {
-                        url: 'image/:id',
+                        url: 'image/:userId/:imageId',
                         templateUrl: env.templatesUrl + 'gallery/image/viewEdit/viewEditImage.html',
                         controller: 'viewEditImageController',
                         controllerAs: 'vm',
@@ -43,13 +43,22 @@
                         resolve: {
                             image: ['galleryService', '$stateParams',
                                 function (galleryService, $stateParams) {
-                                    return galleryService.getImage($stateParams.id);
+                                    return galleryService.getImage($stateParams.userId, $stateParams.imageId);
                                 }]
                         }
                     })
                     .state('chat.profile', {
-                        url: 'user/:id?',
-                        template:'a'
+                        url: 'profile/:userId',
+                        templateUrl: env.templatesUrl + 'gallery/profile/profile.html',
+                        controller: 'profileController',
+                        controllerAs: 'vm',
+                        size: 'full',
+                        resolve: {
+                            profile: ['galleryService', '$stateParams',
+                                function (galleryService, $stateParams) {
+                                    return galleryService.getProfile($stateParams.id);
+                                }]
+                        }
                     });
                 
                 $urlRouterProvider.otherwise('/');

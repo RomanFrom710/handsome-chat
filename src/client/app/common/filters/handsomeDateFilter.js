@@ -6,7 +6,7 @@
         .filter('handsomeDate', handsomeDateFilter);
 
     var onlyTime = 'HH:mm:ss';
-    var timeWithDate = 'MMMM d, y, HH:mm:ss';
+    var timeWithDate = 'MMMM d, y, HH:mm';
 
     handsomeDateFilter.$inject = ['dateFilter'];
 

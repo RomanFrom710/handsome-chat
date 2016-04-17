@@ -15,6 +15,11 @@
             link: function (scope) {
                 scope.getCurrentUser = userService.getCurrentUser;
                 
+                scope.openProfile = function () {
+                    var userId = userService.getCurrentUserId();
+                    $state.go('chat.profile', { userId: userId });
+                };
+                
                 scope.logout = function () {
                     userService.logout()
                         .then(function () {

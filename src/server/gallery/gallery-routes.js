@@ -27,9 +27,9 @@ router.route('/filerules').get(function (req, res) {
     res.send(rules);
 });
 
-router.route('/:imageId').get(function (req, res) {
+router.route('/:userId/:imageId').get(function (req, res) {
     var imageId = req.params.imageId;
-    var userId = req.user.id;
+    var userId = req.params.userId;
     
     galleryService.getImage(userId, imageId)
         .then(function (userImage) {
