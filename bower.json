@@ -18,7 +18,8 @@
     "angular-animate": "1.5.3",
     "ngstorage": "0.3.10",
     "bootswatch-dist": "cerulean",
-    "angular-file-upload": "2.2.0"
+    "angular-file-upload": "2.2.0",
+    "angular-bootstrap-confirm": "1.0.0"
   },
   "resolutions": {
     "bootswatch-dist": "cerulean"

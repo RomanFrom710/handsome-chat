@@ -32,6 +32,14 @@
         
         vm.triggerEditMode = function () {
             vm.editMode = !vm.editMode;
-        }
+        };
+
+        vm.delete = function () {
+            galleryService.deleteImage(vm.image.id)
+                .then(function () {
+                    toastr.success('Image was deleted successfully!');
+                    vm.close();
+                });
+        };
     }
 })();

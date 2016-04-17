@@ -1,7 +1,7 @@
 'use strict';
 
 var galleryRepository = require('./gallery-repository');
-var imageUploadServie = require('./image-upload-service');
+var imageStorageServie = require('./image-storage-service');
 var config = require('../config');
 
 var imageType = require('image-type');
@@ -18,14 +18,13 @@ exports.getImage = function (userId, imageId) {
 exports.uploadImage = function (imageDto) {
     return new Promise(function (resolve) {
         validateImage(imageDto.imageFile);
-        resolve(imageUploadServie.upload(imageDto.imageFile.buffer));
+        resolve(imageStorageServie.upload(imageDto.imageFile.buffer));
     })
     .then(function (imageData) {
         var newImageDto = {
             url: imageData.original,
             previewUrl: imageData.preview,
-            userId: imageDto.userId,
-            description: imageDto.description
+            userId: imageDto.userId
         };
         return galleryRepository.saveImage(newImageDto);
     });
@@ -33,6 +32,20 @@ exports.uploadImage = function (imageDto) {
 
 exports.updateImage = function (imageDto) {
     return galleryRepository.updateImage(imageDto);
+};
+
+exports.deleteImage = function (userId, imageId) {
+    return galleryRepository.getImage(userId, imageId)
+        .then(function (image) {
+            var paths = {
+                original: image.url,
+                preview: image.previewUrl
+            };
+            return imageStorageServie.remove(paths);
+        })
+        .then(function () {
+            return galleryRepository.deleteImage(userId, imageId);
+        });
 };
 
 exports.getFileRules = function () {

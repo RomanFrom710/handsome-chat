@@ -34,5 +34,9 @@
         this.updateImage = function (imageId, imageDto) {
             return Restangular.one('gallery', imageId).customPUT(imageDto);
         };
+        
+        this.deleteImage = function (imageId) {
+            return Restangular.one('gallery', imageId).remove();
+        };
     }
 })();

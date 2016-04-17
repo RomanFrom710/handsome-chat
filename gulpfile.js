@@ -27,8 +27,10 @@ var vendors = [
     'restangular/dist/restangular.js',
     'angular-animate/angular-animate.js',
     'angular-bootstrap/ui-bootstrap-tpls.js',
+    'angular-sanitize/angular-sanitize.js',
     'ngstorage/ngStorage.js',
     'angular-file-upload/dist/angular-file-upload.js',
+    'angular-bootstrap-confirm/dist/angular-bootstrap-confirm.js',
     'angular-toastr/dist/angular-toastr.tpls.js'
 ];
 vendors = vendors.map(function (path) { return join('bower_components', path); });
@@ -77,7 +79,7 @@ gulp.task('less', function() {
         .pipe(less())
         .pipe(concat('styles.css'))
         .pipe(autoprefixer('last 2 versions'))
-        .pipe(production(cssNano()))
+        .pipe(production(cssNano( { zindex: false })))
         .pipe(gulp.dest(compiledPath));
 });
 

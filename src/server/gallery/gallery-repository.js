@@ -33,7 +33,8 @@ exports.saveImage = function (imageDto) {
     return User
         .findByIdAndUpdate(
             userId,
-            { $push: { images: imageDto } })
+            { $push: { images: imageDto } },
+            { new: true })
         .select('images')
         .select({ images: { $slice: -1 } }) // Get only the last image
         .then(function (user) {
@@ -47,4 +48,11 @@ exports.updateImage = function (imageDto) {
             { '_id': imageDto.userId, 'images._id': imageDto.id },
             { $set: { 'images.$.description': imageDto.description }}
         );
+};
+
+exports.deleteImage = function (userId, imageId) {
+    return User
+        .findByIdAndUpdate(
+            userId,
+            { $pull: { images: { id: imageId } } });
 };

@@ -33,7 +33,14 @@
         </div>
         <div class="icon-buttons" ng-if="vm.canEdit">
             <span class="glyphicon glyphicon-pencil" ng-click="vm.triggerEditMode()"></span>
-            <span class="glyphicon glyphicon-trash"></span>
+            <span class="glyphicon glyphicon-trash"
+                  mwl-confirm
+                  title="Image"
+                  message="Are you sure you want to delete this image?"
+                  confirm-text="Delete"
+                  placement="left"
+                  confirm-button-type="danger"
+                  on-confirm="vm.delete()"></span>
         </div>
     </div>
 </div>

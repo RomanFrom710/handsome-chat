@@ -13,6 +13,7 @@
         'ngStorage',
         'ngAnimate',
         'angularFileUpload',
+        'mwl.confirm',
         'toastr'
     ];
     angular

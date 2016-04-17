@@ -1,15 +1,17 @@
 'use strict';
 
 var PassThrough = require('stream').PassThrough;
+var path = require('path');
 
 var cloudinary = require('cloudinary');
 var Promise = require('promise');
 
 var previewBuilder = require('./preview-builder');
 
+var deleteResourses = Promise.denodeify(cloudinary.api.delete_resources);
 
 // Cloudinary keys will be automatically read from env variable.
-module.exports = function (imageBuffer) {
+exports.upload = function (imageBuffer) {
     var saveOriginalPromise = new Promise(function (resolve) {
         var originalImageStream = cloudinary.uploader.upload_stream(function (result) {
             resolve(result);
@@ -35,6 +37,13 @@ module.exports = function (imageBuffer) {
                 preview: uploadResults[1].secure_url
             }
         });
+};
+
+exports.remove = function (paths) {
+    var originalId = path.parse(paths.original).name;
+    var previewId = path.parse(paths.preview).name;
+
+    return deleteResourses([originalId, previewId]);
 };
 
 

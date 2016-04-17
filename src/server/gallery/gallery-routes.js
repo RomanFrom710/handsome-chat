@@ -12,7 +12,7 @@ router.route('/upload').post(multerMiddleware, function (req, res) {
         userId: req.user.id,
         imageFile: req.file
     };
-    
+
     galleryService.uploadImage(imageDto)
         .then(function (imagePaths) {
             res.send(imagePaths);
@@ -30,6 +30,7 @@ router.route('/filerules').get(function (req, res) {
 router.route('/:imageId').get(function (req, res) {
     var imageId = req.params.imageId;
     var userId = req.user.id;
+    
     galleryService.getImage(userId, imageId)
         .then(function (userImage) {
             res.send(userImage);
@@ -45,11 +46,25 @@ router.route('/:imageId').put(function (req, res) {
         userId: req.user.id,
         description: req.body.description
     };
+    
     galleryService.updateImage(imageDto)
         .then(function () {
             res.send(true);
         })
         .catch(function () {
             res.status(500).send('Error while updating image!');
+        });
+});
+
+router.route('/:imageId').delete(function (req, res) {
+    var imageId = req.params.imageId;
+    var userId = req.user.id;
+    
+    galleryService.deleteImage(userId, imageId)
+        .then(function () {
+            res.send(true);
+        })
+        .catch(function () {
+            res.status(500).send('Error while deleting image!');
         });
 });

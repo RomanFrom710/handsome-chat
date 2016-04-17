@@ -15,18 +15,29 @@ var config = require('../../config');
 var imageFolder = config.imagesLocalPath.absolute;
 fs.mkdir(imageFolder, function () {});  // Create folder, if doesn't exist
 
-module.exports = function (imageBuffer) {
+var writeFile = Promise.denodeify(fs.writeFile);
+var removeFile = Promise.denodeify(fs.unlink);
+
+exports.upload = function (imageBuffer) {
     var names = getImageNames(imageBuffer);
     var absolutePaths = getAbsolutePaths(names);
     var publicPaths = getPublicPaths(names);
 
-    var saveOriginalPromise = fs.writeFile(absolutePaths.original, imageBuffer);
+    var saveOriginalPromise = writeFile(absolutePaths.original, imageBuffer);
     var savePreviewPromise = previewBuilder.writeToFile(imageBuffer, absolutePaths.preview);
 
     return Promise.all([saveOriginalPromise, savePreviewPromise])
         .then(function () {
             return publicPaths;
         });
+};
+
+exports.remove = function (paths) {
+    var originalPath = path.join(imageFolder, path.basename(paths.original));
+    var previewPath = path.join(imageFolder, path.basename(paths.preview));
+
+    var promises = [removeFile(originalPath), removeFile(previewPath)];
+    return Promise.all(promises);
 };
 
 
