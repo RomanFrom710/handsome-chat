@@ -35,6 +35,8 @@
                 onExit: onExit
             });
 
+            return provider;
+
             function onEnter($modal, $state, $timeout) {
                 // Get injected resolve results.
                 var resolveValues = _.slice(arguments, inject.length);

@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('gallery', ['ui.router']);
+        .module('gallery', []);
 })();
