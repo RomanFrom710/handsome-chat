@@ -5,11 +5,9 @@ var User = require('../user/user-model');
 
 exports.getImage = function (userId, imageId) {
     return User
-        .findOne({
-            '_id': userId,
-            'images._id': imageId
-        })
-        .select({ images: { $slice: -1 } }) // Get only the last image
+        .findOne(
+            { '_id': userId, 'images._id': imageId },
+            { 'images.$': 1 }) // todo: why is it working?
         .then(function (user) {
             var imageDto = user.images[0].toObject();
             imageDto.author = {
@@ -17,7 +15,7 @@ exports.getImage = function (userId, imageId) {
                 name: user.name
             };
             imageDto.id = imageDto._id;
-            delete imageDto._id;
+            delete imageDto._id; // todo: it's not a jedi way of converting _id to id (find some global option)
             return imageDto;
         });
 };
@@ -49,5 +47,5 @@ exports.deleteImage = function (userId, imageId) {
     return User
         .findByIdAndUpdate(
             userId,
-            { $pull: { images: { id: imageId } } });
+            { $pull: { images: { _id: imageId } } });
 };
