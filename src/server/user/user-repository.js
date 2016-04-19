@@ -17,7 +17,7 @@ exports.findByName = function (name) {
 exports.getUserProfile = function (userId) {
     return User
         .findById(userId)
-        .select('id name created images.id images.previewUrl');
+        .select('id name created images._id images.previewUrl'); // todo: replace _id by id
 };
 
 exports.createUser = function (userDto) {

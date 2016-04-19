@@ -12,7 +12,7 @@
         vm.image = image;
         
         vm.editMode = false;
-        vm.canEdit = userService.getCurrentUser() === image.author.name;
+        vm.canEdit = userService.getCurrentUserId() === image.author.id;
 
         vm.save = function () {
             var imageDto = { description: vm.image.description };
@@ -27,7 +27,7 @@
         };
         
         vm.close = function () {
-            $state.go('^');
+            $state.go('^', {}, { reload: true });
         };
         
         vm.triggerEditMode = function () {

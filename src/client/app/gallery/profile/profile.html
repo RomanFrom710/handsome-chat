@@ -1,9 +1,18 @@
-<div class="view-edit-image handsome-modal">
+<div class="profile handsome-modal">
     <h2 class="title">
         <strong>{{vm.user.name}}</strong>
         <em>(Registered: {{vm.user.created | handsomeDate}})</em>
     </h2>
     <div class="card">
-
+        <div class="images">
+            <img class="handsome-hover clickable"
+                 ng-repeat="image in vm.user.images"
+                 ng-src="{{image.previewUrl}}"
+                 alt="Image"
+                 ui-sref="chat.profile.image({ userId: vm.user._id, imageId: image._id })" />
+            <h3 ng-if="!vm.user.images || vm.user.images.length === 0">
+                {{vm.user.name}} has no pictures!
+            </h3>
+        </div>
     </div>
 </div>

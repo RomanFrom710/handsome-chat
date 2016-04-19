@@ -1,6 +1,9 @@
 <h4>Handsome people to talk with</h4>
 <ul class="users-list list-group card">
-    <li class="list-group-item"
+    <li class="list-group-item handsome-hover clickable"
         ng-repeat="user in users"
-        ng-bind="user.name"></li>
+        ui-sref="chat.profile({ userId: user.id })">
+        <i class="glyphicon glyphicon-user"></i>
+        <span>{{user.name}}</span>
+    </li>
 </ul>

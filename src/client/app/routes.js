@@ -56,7 +56,20 @@
                         resolve: {
                             profile: ['galleryService', '$stateParams',
                                 function (galleryService, $stateParams) {
-                                    return galleryService.getProfile($stateParams.id);
+                                    return galleryService.getProfile($stateParams.userId);
+                                }]
+                        }
+                    })
+                    .state('chat.profile.image', {
+                        url: '/:imageId',
+                        templateUrl: env.templatesUrl + 'gallery/image/viewEdit/viewEditImage.html',
+                        controller: 'viewEditImageController',
+                        controllerAs: 'vm',
+                        size: 'full',
+                        resolve: {
+                            image: ['galleryService', '$stateParams',
+                                function (galleryService, $stateParams) {
+                                    return galleryService.getImage($stateParams.userId, $stateParams.imageId);
                                 }]
                         }
                     });
