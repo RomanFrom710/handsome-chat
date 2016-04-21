@@ -2,6 +2,7 @@
 
 var userService = require('../user/user-service');
 var chatService = require('./chat-service');
+var galleryService = require('../gallery/gallery-service');
 var _ = require('lodash');
 
 module.exports = initChatEvents;
@@ -25,5 +26,22 @@ function initChatEvents (io, socket, userId) {
             userId: userId
         };
         chatService.post(messageDto);
+    });
+
+    socket.on('image', function (imageId) {
+        galleryService.getImage(userId, imageId)
+            .then(function (image) {
+                var messageDto = {
+                    image: {
+                        id: imageId,
+                        previewUrl: image.previewUrl
+                    },
+                    author: image.author
+                };
+                io.emit('message', messageDto);
+
+                messageDto.userId = messageDto.author.id;
+                chatService.post(messageDto);
+            });
     });
 }

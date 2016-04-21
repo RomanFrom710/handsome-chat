@@ -1,0 +1,15 @@
+<p class="message card" ng-class="{'my-message': isMyMessage }"
+   class="message"
+   uib-popover="{{message.created | handsomeDate}}"
+   popover-placement="{{isMyMessage ? 'left' : 'right'}}"
+   popover-trigger="mouseenter">
+    <a ng-bind="message.author.name"
+       ui-sref="chat.profile({ userId: message.author.id })"
+       class="author-name"></a>
+    :
+    <span ng-if="!hasImage" ng-bind="message.content"></span>
+    <img ng-if="hasImage"
+         ng-src="{{message.image.previewUrl}}"
+         class="img-rounded clickable"
+         ui-sref="chat.singleImage(imageStateParams)"/>
+</p>

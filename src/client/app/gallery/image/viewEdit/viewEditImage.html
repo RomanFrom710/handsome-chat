@@ -9,6 +9,11 @@
         </div>
         <div class="col-md-4 image-info">
             <div class="btn-group-justified">
+                <div class="btn-group" ng-if="vm.isOwner">
+                    <button class="btn btn-primary" ng-click="vm.send()">
+                        Send
+                    </button>
+                </div>
                 <div class="btn-group">
                     <button class="btn btn-default" ng-click="vm.close()">
                         Close
@@ -17,10 +22,10 @@
             </div>
             <div class="description">
                 <p ng-bind="vm.image.description"
-                   ng-if="!vm.canEdit"></p>
+                   ng-if="!vm.isOwner"></p>
                 <textarea class="form-control"
                           placeholder="Description..."
-                          ng-if="vm.canEdit"
+                          ng-if="vm.isOwner"
                           ng-disabled="!vm.editMode"
                           ng-model="vm.image.description"></textarea>
             </div>
@@ -32,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="icon-buttons" ng-if="vm.canEdit">
+        <div class="icon-buttons" ng-if="vm.isOwner">
             <span class="glyphicon glyphicon-pencil" ng-click="vm.triggerEditMode()"></span>
             <span class="glyphicon glyphicon-trash"
                   mwl-confirm

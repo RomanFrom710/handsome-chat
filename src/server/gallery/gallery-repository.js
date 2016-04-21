@@ -6,8 +6,8 @@ var User = require('../user/user-model');
 exports.getImage = function (userId, imageId) {
     return User
         .findOne(
-            { '_id': userId, 'images._id': imageId },
-            { 'images.$': 1 }) // todo: why is it working?
+            { '_id': userId, 'images._id': imageId })
+        .select('images.$ name')
         .then(function (user) {
             var imageDto = user.images[0].toObject();
             imageDto.author = {

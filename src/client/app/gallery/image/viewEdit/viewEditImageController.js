@@ -5,14 +5,15 @@
         .module('gallery')
         .controller('viewEditImageController', viewEditImageController);
 
-    viewEditImageController.$inject = ['$state', 'galleryService', 'userService', 'image', 'toastr'];
+    viewEditImageController.$inject = ['$state', 'galleryService', 'userService', 'chatService', 'image', 'toastr'];
 
-    function viewEditImageController($state, galleryService, userService, image, toastr) {
+    function viewEditImageController($state, galleryService, userService, chatService, image, toastr) {
         var vm = this;
         vm.image = image;
         
         vm.editMode = false;
-        vm.canEdit = userService.getCurrentUserId() === image.author.id;
+        vm.isOwner = userService.getCurrentUserId() === image.author.id;
+        vm.isSingleImage = $state.is('chat.singleImage');
 
         vm.save = function () {
             var imageDto = { description: vm.image.description };
@@ -25,9 +26,14 @@
                     $state.reload();
                 });
         };
+
+        vm.send = function () {
+            chatService.sendImage(vm.image.id);
+            $state.go('chat');
+        };
         
         vm.close = function () {
-            $state.go('^', {}, { reload: true });
+            $state.go('^');
         };
         
         vm.triggerEditMode = function () {
@@ -38,7 +44,7 @@
             galleryService.deleteImage(vm.image.id)
                 .then(function () {
                     toastr.success('Image was deleted successfully!');
-                    vm.close();
+                    $state.go('^', {}, { reload: !vm.isSingleImage });
                 });
         };
     }

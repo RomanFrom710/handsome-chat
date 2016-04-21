@@ -5,9 +5,9 @@
         .module('chat')
         .directive('messagesArea', messagesAreaDirective);
 
-    messagesAreaDirective.$inject = ['userService', 'chatService', '$timeout', '$uibModal', 'environment'];
+    messagesAreaDirective.$inject = ['chatService', '$timeout', '$uibModal', 'environment'];
 
-    function messagesAreaDirective(userService, chatService, $timeout, $modal, env) {
+    function messagesAreaDirective(chatService, $timeout, $modal, env) {
         return {
             restrict: 'E',
             templateUrl: env.templatesUrl + 'chat/messagesArea/messagesArea.html',
@@ -19,7 +19,6 @@
                 var inputElement = element[0].querySelector('.message-input');
                 
                 scope.currentMessage = '';
-                scope.currentUser = userService.getCurrentUser();
 
                 scope.send = function () {
                     chatService.sendMessage(scope.currentMessage);
@@ -37,7 +36,6 @@
                         // has no content yet.
                         messagesElement.scrollTop = messagesElement.scrollHeight;
                     });
-                    messagesElement.scrollTop = messagesElement.scrollHeight;
                 });
 
                 scope.openImageUpload = function () {

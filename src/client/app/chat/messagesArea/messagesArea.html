@@ -1,13 +1,6 @@
 <div class="messages">
-    <p ng-repeat="message in messages track by $index"
-       ng-class="{'my-message': message.author.name === currentUser}"
-       class="message card"
-       uib-popover="{{message.created | handsomeDate}}"
-       popover-placement="{{message.author.name === currentUser ? 'left' : 'right'}}"
-       popover-trigger="mouseenter">
-        <strong ng-bind="message.author.name"></strong>:
-        <span ng-bind="message.content"></span>
-    </p>
+    <message ng-repeat="message in messages track by $index"
+             message="message"></message>
 </div>
 <form ng-submit="sendForm.$valid && send()" name="sendForm" class="input-group" novalidate>
     <span class="input-group-btn">

@@ -23,6 +23,10 @@
         this.sendMessage = function (message) {
             socketService.emit('message', { content: message })
         };
+        
+        this.sendImage = function (imageId) {
+            socketService.emit('image', imageId);
+        };
 
         this.getLastMessages = function () {
             return Restangular.all('chat/lastMessages').getList();
