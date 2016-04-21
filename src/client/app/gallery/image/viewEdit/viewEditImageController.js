@@ -12,7 +12,7 @@
         vm.image = image;
         
         vm.editMode = false;
-        vm.isOwner = userService.getCurrentUserId() === image.author.id;
+        vm.isOwner = userService.getCurrentUser().id === image.author.id;
         vm.isSingleImage = $state.is('chat.singleImage');
 
         vm.save = function () {

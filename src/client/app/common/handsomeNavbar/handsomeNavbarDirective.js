@@ -13,10 +13,16 @@
             templateUrl: env.templatesUrl + 'common/handsomeNavbar/handsomeNavbar.html',
             scope: {},
             link: function (scope) {
-                scope.getCurrentUser = userService.getCurrentUser;
+                scope.isLoggedIn = function () {
+                    return userService.isLoggedIn();
+                };
+
+                scope.getUserName = function () {
+                    return userService.getCurrentUser().name;
+                };
                 
                 scope.openProfile = function () {
-                    var userId = userService.getCurrentUserId();
+                    var userId = userService.getCurrentUser().id;
                     $state.go('chat.profile', { userId: userId });
                 };
                 

@@ -15,7 +15,7 @@
                 message: '='
             },
             link: function (scope) {
-                var currentUserId = userService.getCurrentUserId();
+                var currentUserId = userService.getCurrentUser().id;
                 scope.hasImage = !!scope.message.image;
                 scope.isMyMessage = currentUserId === scope.message.author.id;
                 

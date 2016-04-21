@@ -4,11 +4,11 @@
             <a class="navbar-brand">Handsome chat</a>
         </div>
 
-        <div ng-if="getCurrentUser()">
+        <div ng-if="isLoggedIn()">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a class="clickable" ng-click="openProfile()">
-                        <span ng-bind="getCurrentUser()"></span>
+                        <span ng-bind="getUserName()"></span>
                         <i class="glyphicon glyphicon-user"></i>
                     </a>
                 </li>
@@ -21,7 +21,7 @@
             </ul>
         </div>
 
-        <div ng-if="!getCurrentUser()">
+        <div ng-if="!isLoggedIn()">
             <ul class="nav navbar-nav navbar-right">
                 <li ui-sref-active="active">
                     <a ui-sref="login">

@@ -10,13 +10,16 @@
     function UserService(Restangular, $localStorage, socketService) {
         var self = this;
 
-        // todo: refactor current user methods
         this.getCurrentUser = function () {
-            return $localStorage.userName || null;
+            return {
+                id: $localStorage.userId || null,
+                name: $localStorage.userName || null
+            };
         };
         
-        this.getCurrentUserId = function () {
-            return $localStorage.userId || null;
+        this.isLoggedIn = function () {
+            var currentUser = this.getCurrentUser();
+            return !!(currentUser.id && currentUser.name);
         };
         
         if (this.getCurrentUser()) {
@@ -49,7 +52,7 @@
         };
 
         this.resetCurrentUser = function () {
-            if (self.getCurrentUser()) {
+            if (this.getCurrentUser()) {
                 delete $localStorage.userName;
                 delete $localStorage.userId;
                 socketService.disconnect();

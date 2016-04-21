@@ -10,7 +10,7 @@
     function registerController($scope, $state, userService) {
         var vm = this;
 
-        if (userService.getCurrentUser()) {
+        if (userService.isLoggedIn()) {
             $state.go('chat');
         }
 

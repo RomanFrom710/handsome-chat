@@ -15,16 +15,16 @@
                 users: '='
             },
             link: function (scope) {
-                var currentUser = userService.getCurrentUser();
+                var currentUserId = userService.getCurrentUser().id;
 
                 chatService.onUserJoined(function (user) {
-                    var isCurrent = user.name !== currentUser;
+                    var isCurrent = user.id === currentUserId;
                     // Fixing case, when server reloads and we recieve 'join' event
                     // of users who had been already connected and therefore duplicates
                     // appear in users list. It's not a good idea to handle it in such
                     // an ugly way, so need to try find better approach.
-                    var isExisting = _.findIndex(scope.users, { name: user.name }) !== -1;
-                    if (isCurrent && !isExisting) {
+                    var isExisting = _.findIndex(scope.users, { id: user.id }) !== -1;
+                    if (!isCurrent && !isExisting) {
                         scope.users.push(user);
                     }
                 });

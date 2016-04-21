@@ -38,7 +38,7 @@
                 vm.progress.isLoading = false;
                 toastr.success('The image was successfully uploaded!');
                 $scope.$close();
-                var userId = userService.getCurrentUserId();
+                var userId = userService.getCurrentUser().id;
                 $state.go('chat.singleImage', { userId: userId, imageId: response });
             };
             uploader.onErrorItem = function (item, response) {
