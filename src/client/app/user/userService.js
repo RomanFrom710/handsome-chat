@@ -22,7 +22,7 @@
             return !!(currentUser.id && currentUser.name);
         };
         
-        if (this.getCurrentUser()) {
+        if (this.isLoggedIn()) {
             socketService.connect();
         }
         
@@ -52,7 +52,7 @@
         };
 
         this.resetCurrentUser = function () {
-            if (this.getCurrentUser()) {
+            if (this.isLoggedIn()) {
                 delete $localStorage.userName;
                 delete $localStorage.userId;
                 socketService.disconnect();
