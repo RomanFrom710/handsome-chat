@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('gallery')
+        .module('common')
         .directive('fileUploadButton', fileUploadButtonDirective);
 
     function fileUploadButtonDirective() {

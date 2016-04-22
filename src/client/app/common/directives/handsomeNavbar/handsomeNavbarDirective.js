@@ -10,7 +10,7 @@
     function handsomeNavbarDirective($state, userService, env) {
         return {
             restrict: 'E',
-            templateUrl: env.templatesUrl + 'common/handsomeNavbar/handsomeNavbar.html',
+            templateUrl: env.templatesUrl + 'common/directives/handsomeNavbar/handsomeNavbar.html',
             scope: {},
             link: function (scope) {
                 scope.isLoggedIn = function () {
