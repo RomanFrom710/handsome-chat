@@ -9,7 +9,7 @@
                  ng-repeat="image in vm.user.images"
                  ng-src="{{image.previewUrl}}"
                  alt="Image"
-                 ui-sref="chat.profile.image({ userId: vm.user._id, imageId: image._id })" />
+                 ui-sref="chat.profile.image({ userId: vm.user.id, imageId: image.id })" />
             <h3 ng-if="!vm.user.images || vm.user.images.length === 0">
                 {{vm.user.name}} has no pictures!
             </h3>

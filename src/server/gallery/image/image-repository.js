@@ -1,6 +1,6 @@
 'use strict';
 
-var User = require('../user/user-model');
+var User = require('../../user/user-model');
 
 
 exports.getImage = function (userId, imageId) {
@@ -9,13 +9,11 @@ exports.getImage = function (userId, imageId) {
             { '_id': userId, 'images._id': imageId })
         .select('images.$ name')
         .then(function (user) {
-            var imageDto = user.images[0].toObject();
+            var imageDto = user.images[0].toJSON();
             imageDto.author = {
                 id: user.id,
                 name: user.name
             };
-            imageDto.id = imageDto._id;
-            delete imageDto._id; // todo: it's not a jedi way of converting _id to id (find some global option)
             return imageDto;
         });
 };
@@ -28,7 +26,6 @@ exports.saveImage = function (imageDto) {
             userId,
             { $push: { images: imageDto } },
             { new: true })
-        .select('images')
         .select({ images: { $slice: -1 } }) // Get only the last image
         .then(function (user) {
             return user.images[0].id;

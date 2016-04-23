@@ -1,6 +1,6 @@
 'use strict';
 
-var galleryRepository = require('./gallery-repository');
+var imageRepository = require('./image/image-repository');
 var imageStorageServie = require('./image-storage-service');
 var config = require('../config');
 
@@ -8,11 +8,11 @@ var imageType = require('image-type');
 var Promise = require('promise');
 
 exports.getUserImages = function (userId) {
-    return galleryRepository.getUserImages(userId);
+    return imageRepository.getUserImages(userId);
 };
 
 exports.getImage = function (userId, imageId) {
-    return galleryRepository.getImage(userId, imageId);
+    return imageRepository.getImage(userId, imageId);
 };
 
 exports.uploadImage = function (imageDto) {
@@ -26,16 +26,16 @@ exports.uploadImage = function (imageDto) {
             previewUrl: imageData.preview,
             userId: imageDto.userId
         };
-        return galleryRepository.saveImage(newImageDto);
+        return imageRepository.saveImage(newImageDto);
     });
 };
 
 exports.updateImage = function (imageDto) {
-    return galleryRepository.updateImage(imageDto);
+    return imageRepository.updateImage(imageDto);
 };
 
 exports.deleteImage = function (userId, imageId) {
-    return galleryRepository.getImage(userId, imageId)
+    return imageRepository.getImage(userId, imageId)
         .then(function (image) {
             var paths = {
                 original: image.url,
@@ -44,7 +44,7 @@ exports.deleteImage = function (userId, imageId) {
             return imageStorageServie.remove(paths);
         })
         .then(function () {
-            return galleryRepository.deleteImage(userId, imageId);
+            return imageRepository.deleteImage(userId, imageId);
         });
 };
 
