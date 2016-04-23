@@ -6,7 +6,10 @@ var localConfig = require('./local');
 var config = {
     mongoConnectionString: process.env.MONGODB || localConfig.mongoConnectionString,
     port: process.env.PORT || 80,
-    session: localConfig.session,
+    session: {
+        name: localConfig.session.name,
+        secret: process.env.SESSION_SECRET || localConfig.session.secret
+    },
     useCloudinary: true,
     application: localConfig.application
 };
