@@ -9,7 +9,7 @@ var imageSchema = new Schema({
     url: String,
     previewUrl: String,
     created: { type: Date, default: Date.now },
-    likers: [{ type: Schema.Types.ObjectId, ref: 'User', unique: true }]
+    likers: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
 schemaTransformer.renameIdField(imageSchema);

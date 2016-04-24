@@ -11,8 +11,8 @@ exports.getUserImages = function (userId) {
     return imageRepository.getUserImages(userId);
 };
 
-exports.getImage = function (userId, imageId) {
-    return imageRepository.getImage(userId, imageId);
+exports.getImage = function (imageQuery) {
+    return imageRepository.getImage(imageQuery);
 };
 
 exports.uploadImage = function (imageDto) {
@@ -43,7 +43,7 @@ exports.updateImage = function (imageDto) {
 };
 
 exports.deleteImage = function (userId, imageId) {
-    return imageRepository.getImage(userId, imageId)
+    return imageRepository.getImagePathes(userId, imageId)
         .then(function (image) {
             var paths = {
                 original: image.url,

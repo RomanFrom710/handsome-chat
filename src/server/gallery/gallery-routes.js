@@ -28,10 +28,13 @@ router.route('/filerules').get(function (req, res) {
 });
 
 router.route('/:userId/:imageId').get(function (req, res) {
-    var imageId = req.params.imageId;
-    var userId = req.params.userId;
+    var imageQuery = {
+        imageId: req.params.imageId,
+        userId: req.params.userId,
+        currentUserId: req.user.id
+    };
     
-    galleryService.getImage(userId, imageId)
+    galleryService.getImage(imageQuery)
         .then(function (userImage) {
             res.send(userImage);
         })
