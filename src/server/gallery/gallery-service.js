@@ -6,6 +6,7 @@ var config = require('../config');
 
 var imageType = require('image-type');
 var Promise = require('promise');
+var _ = require('lodash');
 
 exports.getUserImages = function (userId) {
     return imageRepository.getUserImages(userId);
@@ -73,7 +74,7 @@ function validateImage (imageFile) {
     }
 
     var imageInfo = imageType(imageFile.buffer);
-    var isValidExtension = imageInfo && rules.allowedExtensions.indexOf(imageInfo.ext) !== -1;
+    var isValidExtension = imageInfo && _.includes(rules.allowedExtensions, imageInfo.ext);
     if (!isValidExtension) {
         throw new Error('Wrong file extension!');
     }

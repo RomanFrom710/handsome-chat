@@ -71,7 +71,7 @@
                 name: extensionsFilterName,
                 fn: function (item) {
                     var extension = _.last(item.name.split('.')).toLowerCase();
-                    return _.indexOf(vm.allowedExtensions, extension) !== -1;
+                    return _.includes(vm.allowedExtensions, extension);
                 }
             });
 
