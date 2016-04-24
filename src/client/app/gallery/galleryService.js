@@ -26,6 +26,14 @@
         this.getImage = function (userId, imageId) {
             return Restangular.one('gallery', userId).one(imageId).get();
         };
+
+        this.likeImage = function (userId, imageId) {
+            return Restangular.one('gallery', userId).one(imageId).one('like').post();
+        };
+        
+        this.unlikeImage = function (userId, imageId) {
+            return Restangular.one('gallery', userId).one(imageId).one('unlike').post();
+        };
         
         this.updateImage = function (imageId, imageDto) {
             return Restangular.one('gallery', imageId).customPUT(imageDto);

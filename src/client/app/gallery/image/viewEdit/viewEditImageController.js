@@ -31,6 +31,27 @@
             chatService.sendImage(vm.image.id);
             $state.go('chat');
         };
+
+        var isLiking = false;
+        vm.triggerLike = function () {
+            if (isLiking) {
+                return;
+            }
+
+            isLiking = true;
+            var promise = vm.image.hasLiked ?
+                galleryService.unlikeImage(vm.image.author.id, vm.image.id) :
+                galleryService.likeImage(vm.image.author.id, vm.image.id);
+
+            promise
+                .then(function (likes) {
+                    vm.image.likes = likes;
+                    vm.image.hasLiked = !vm.image.hasLiked;
+                })
+                .finally(function () {
+                    isLiking = false;
+                });
+        };
         
         vm.close = function () {
             $state.go('^');

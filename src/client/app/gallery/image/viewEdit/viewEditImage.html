@@ -20,6 +20,14 @@
                     </button>
                 </div>
             </div>
+
+            <div class="like-container">
+                <i class="heart glyphicon clickable handsome-hover"
+                   ng-class="{'glyphicon-heart': vm.image.hasLiked, 'glyphicon-heart-empty': !vm.image.hasLiked }"
+                   ng-click="vm.triggerLike()"></i>
+                <span ng-bind="+vm.image.likes"></span>
+            </div>
+
             <div class="description">
                 <p ng-bind="vm.image.description"
                    ng-if="!vm.isOwner"></p>
@@ -29,6 +37,7 @@
                           ng-disabled="!vm.editMode"
                           ng-model="vm.image.description"></textarea>
             </div>
+
             <div class="btn-group-justified" ng-show="vm.editMode">
                 <div class="btn-group">
                     <button ng-click="vm.save()"  class="btn btn-primary">
@@ -37,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="icon-buttons" ng-if="vm.isOwner">
+        <div class="edit-buttons" ng-if="vm.isOwner">
             <span class="glyphicon glyphicon-pencil" ng-click="vm.triggerEditMode()"></span>
             <span class="glyphicon glyphicon-trash"
                   mwl-confirm

@@ -30,6 +30,14 @@ exports.uploadImage = function (imageDto) {
     });
 };
 
+exports.likeImage = function (likeDto) {
+    return imageRepository.likeImage(likeDto);
+};
+
+exports.unlikeImage = function (unlikeDto) {
+    return imageRepository.unlikeImage(unlikeDto);
+};
+
 exports.updateImage = function (imageDto) {
     return imageRepository.updateImage(imageDto);
 };

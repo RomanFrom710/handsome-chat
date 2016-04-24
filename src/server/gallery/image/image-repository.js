@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('../../user/user-model');
+var ObjectId = require('mongoose').Types.ObjectId;
 
 
 exports.getImage = function (userId, imageId) {
@@ -29,6 +30,32 @@ exports.saveImage = function (imageDto) {
         .select({ images: { $slice: -1 } }) // Get only the last image
         .then(function (user) {
             return user.images[0].id;
+        });
+};
+
+exports.likeImage = function (likeDto) {
+    return User
+        .findOneAndUpdate(
+            { '_id': likeDto.userId, 'images._id': likeDto.imageId },
+            { $push: { 'images.$.likers': likeDto.currentUserId } },
+            { new: true })
+        .findOne({ 'images._id': likeDto.imageId })
+        .select('images.$')
+        .then(function (user) {
+            return user.images[0].likers.length; // todo: don't load the whole likers array
+        });
+};
+
+exports.unlikeImage = function (unlikeDto) {
+    return User
+        .findOneAndUpdate(
+            { '_id': unlikeDto.userId, 'images._id': unlikeDto.imageId },
+            { $pull: { 'images.$.likers': new ObjectId(unlikeDto.currentUserId) } },
+            { new: true })
+        .findOne({ 'images._id': unlikeDto.imageId })
+        .select('images.$')
+        .then(function (user) {
+            return user.images[0].likers.length; // todo: don't load the whole likers array
         });
 };
 

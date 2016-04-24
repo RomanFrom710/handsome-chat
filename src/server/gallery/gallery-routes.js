@@ -40,6 +40,38 @@ router.route('/:userId/:imageId').get(function (req, res) {
         });
 });
 
+router.route('/:userId/:imageId/like').post(function (req, res) {
+    var likeDto = {
+        userId: req.params.userId,
+        imageId: req.params.imageId,
+        currentUserId: req.user.id
+    };
+
+    galleryService.likeImage(likeDto)
+        .then(function (likes) {
+            res.send(likes.toString());
+        })
+        .catch(function () {
+            res.status(400).send('Error while liking the image!');
+        });
+});
+
+router.route('/:userId/:imageId/unlike').post(function (req, res) {
+    var unlikeDto = {
+        userId: req.params.userId,
+        imageId: req.params.imageId,
+        currentUserId: req.user.id
+    };
+
+    galleryService.unlikeImage(unlikeDto)
+        .then(function (likes) {
+            res.send(likes.toString());
+        })
+        .catch(function () {
+            res.status(400).send('Error while unliking the image!');
+        });
+});
+
 router.route('/:imageId').put(function (req, res) {
     var imageDto = {
         id: req.params.imageId,
