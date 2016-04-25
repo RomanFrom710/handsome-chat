@@ -37,7 +37,7 @@ exports.remove = function (paths) {
     var previewPath = path.join(imageFolder, path.basename(paths.preview));
 
     var promises = [removeFile(originalPath), removeFile(previewPath)];
-    return Promise.all(promises);
+    return Promise.all(promises).catch(function () {});
 };
 
 

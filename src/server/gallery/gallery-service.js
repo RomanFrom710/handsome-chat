@@ -44,7 +44,13 @@ exports.updateImage = function (imageDto) {
 };
 
 exports.deleteImage = function (userId, imageId) {
-    return imageRepository.getImagePathes(userId, imageId)
+    var imageQuery = {
+        userId: userId,
+        imageId: imageId,
+        currentUserId: userId
+    };
+
+    return imageRepository.getImage(imageQuery)
         .then(function (image) {
             var paths = {
                 original: image.url,

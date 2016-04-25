@@ -29,7 +29,13 @@ function initChatEvents (io, socket, userId) {
     });
 
     socket.on('image', function (imageId) {
-        galleryService.getImage(userId, imageId)
+        var imageQuery = {
+            userId: userId,
+            imageId: imageId,
+            currentUserId: userId
+        };
+
+        galleryService.getImage(imageQuery)
             .then(function (image) {
                 var messageDto = {
                     image: {
