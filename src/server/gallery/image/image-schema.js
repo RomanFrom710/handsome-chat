@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var schemaTransformer = require('../../schema-transformer');
+var schemaTransformer = require('../../extensions/schema-transformer');
 
 var imageSchema = new Schema({
     description: String,

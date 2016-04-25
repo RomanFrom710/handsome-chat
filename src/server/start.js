@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var http = require('http');
 var config = require('./config');
-var authMiddleware = require('./auth');
+var authMiddleware = require('./extensions/auth');
 
 mongoose.connect(config.mongoConnectionString);
 

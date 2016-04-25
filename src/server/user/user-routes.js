@@ -3,7 +3,7 @@
 var router = require('express').Router();
 var passport = require('passport');
 var userService = require('./user-service');
-var authMiddleware = require('../auth');
+var authMiddleware = require('../extensions/auth');
 
 module.exports = router;
 

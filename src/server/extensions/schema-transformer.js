@@ -1,5 +1,4 @@
 'use strict';
-// todo: find a better directory for this file
 
 // This method is needed because somewhy mongoose prefers to return _id
 // instead of id to the client. But _id appearing (which is a sort of db
