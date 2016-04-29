@@ -10,7 +10,7 @@
     <span ng-if="!hasImage" ng-bind="message.content"></span>
     <img ng-if="hasImage"
          ng-src="{{message.image.previewUrl}}"
-         class="img-rounded clickable"
+         class="img-rounded img-responsive clickable"
          image-error-placeholder="The image has been deleted..."
          ui-sref="chat.singleImage(imageStateParams)"/>
 </p>
