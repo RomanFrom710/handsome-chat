@@ -3,6 +3,9 @@
 .login-form {
   width: @login-form-width;
   max-width: @login-form-max-width;
+  @media only screen and (max-width: 500px) {
+    width: @login-form-small-screen-width;
+  }
 
   margin: 100px auto;
   text-align: center;
