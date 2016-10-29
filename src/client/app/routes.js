@@ -60,6 +60,17 @@
                                 }]
                         }
                     })
+                    .state('chat.statistics', {
+                        url: 'statistics',
+                        templateUrl: env.templatesUrl + 'statistics/statistics.html',
+                        controller: 'statisticsController',
+                        controllerAs: 'vm',
+                        resolve: {
+                            statistics: ['statisticsService', function (statisticsService) {
+                                return statisticsService.getStatistics();
+                            }]
+                        }
+                    })
                     .state('chat.profile.image', {
                         url: '/:imageId',
                         templateUrl: env.templatesUrl + 'gallery/image/viewEdit/viewEditImage.html',

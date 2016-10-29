@@ -25,6 +25,10 @@
                     var userId = userService.getCurrentUser().id;
                     $state.go('chat.profile', { userId: userId });
                 };
+
+                scope.openStatistics = function () {
+                    $state.go('chat.statistics');
+                };
                 
                 scope.logout = function () {
                     userService.logout()

@@ -1,0 +1,21 @@
+<div class="handsome-modal">
+    <h2 class="title">
+        Chat statistics
+    </h2>
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Metric name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="metric in vm.statistics">
+                    <td ng-bind="metric.name"></td>
+                    <td ng-bind="metric.value"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

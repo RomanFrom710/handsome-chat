@@ -39,6 +39,7 @@
   },
   "scripts": {
     "start": "node ./src/server/start.js",
+    "gulp": "gulp",
     "prepublish": "bower install && gulp build"
   }
 }

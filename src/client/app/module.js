@@ -6,6 +6,7 @@
         'chat',
         'gallery',
         'user',
+        'statistics',
         'templates',
         'ui.router',
         'ui.bootstrap',
