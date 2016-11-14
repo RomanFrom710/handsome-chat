@@ -22,6 +22,7 @@
     "angular-bootstrap-confirm": "1.0.0"
   },
   "resolutions": {
+    "angular": "1.5.5",
     "bootswatch-dist": "cerulean"
   }
 }

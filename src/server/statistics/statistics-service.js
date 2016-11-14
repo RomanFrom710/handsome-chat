@@ -1,11 +1,8 @@
 'use strict';
 
+var statisticsRepository = require('./statistics-repository');
+
+
 exports.getStatistics = function () {
-    return [{
-        name: 'test metric 1',
-        value: 'test value 1'
-    }, {
-        name: 'test metric 2',
-        value: 'test value 2'
-    }]
+    return statisticsRepository.getStatistics();
 };
