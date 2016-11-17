@@ -12,8 +12,12 @@
             </thead>
             <tbody>
                 <tr ng-repeat="metric in vm.statistics">
-                    <td ng-bind="metric.name"></td>
-                    <td ng-bind="metric.value"></td>
+                    <td>
+                        <em ng-bind="metric.name"></em>
+                    </td>
+                    <td>
+                        <strong ng-bind="metric.value"></strong>
+                    </td>
                 </tr>
             </tbody>
         </table>
