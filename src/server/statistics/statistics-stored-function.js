@@ -2,6 +2,21 @@
 
 module.exports = function () {
     var result = [];
+    var wordsCollection = 'wordsStatistics';
+    var statisticsCacheCollection = 'statisticsCache';
+    var cachePeriod = 24 * 60 * 60 * 1000; // 1 day in ms
+
+    var lastStatistics = db.getCollection(statisticsCacheCollection)
+        .find()
+        .sort({ created: -1 })
+        .limit(1)[0];
+
+    if (lastStatistics) {
+        var timeSpanFromLastValue = (new Date()).getTime() -lastStatistics.created.getTime();
+        if (timeSpanFromLastValue < cachePeriod) {
+            return lastStatistics.statistics;
+        }
+    }
 
     result.push({
         name: 'First message date',
@@ -9,8 +24,6 @@ module.exports = function () {
             .findOne()
             .created.toLocaleString()
     });
-
-    var wordsCollection = 'wordsStatistics';
 
     db.messages.find().snapshot().forEach(function (message) {
         var words = message.content.split(' ').filter(function (word) {
@@ -86,6 +99,11 @@ module.exports = function () {
 
 
     db.getCollection(wordsCollection).remove({ });
+
+    db.getCollection(statisticsCacheCollection).insert({
+        created: new Date(),
+        statistics: result
+    });
 
     return result;
 };
