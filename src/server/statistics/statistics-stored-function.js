@@ -26,6 +26,10 @@ module.exports = function () {
     });
 
     db.messages.find().snapshot().forEach(function (message) {
+        if (!message.content) {
+            return;
+        }
+
         var words = message.content.split(' ').filter(function (word) {
             return word.length > 0;
         });
